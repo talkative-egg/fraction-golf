@@ -1,3 +1,5 @@
+import { titleImgs } from "../loadImages";
+
 export const titlePage = (() => {
 
     const body = document.querySelector("body");
@@ -26,9 +28,9 @@ export const titlePage = (() => {
 
         const container = makeDiv([], "fraction");
 
-        const firstImage = makeImg("frac", "../src/images/frac.png");
-        const secondImage = makeImg("bar", "../src/images/bar.png");
-        const thirdImage = makeImg("tion", "../src/images/tion.png");
+        const firstImage = makeImg("frac", titleImgs.frac);
+        const secondImage = makeImg("bar", titleImgs.bar);
+        const thirdImage = makeImg("tion", titleImgs.tion);
 
         container.appendChild(firstImage);
         container.appendChild(secondImage);
@@ -42,13 +44,13 @@ export const titlePage = (() => {
 
         const container = makeDiv([], "golf");
 
-        const g = makeImg("g", "../src/images/golf_g.png");
+        const g = makeImg("g", titleImgs.golf_g);
         g.style.opacity = "0%";
-        const o = makeImg("o", "../src/images/golf_o.png");
+        const o = makeImg("o", titleImgs.golf_o);
         o.style.opacity = "0%";
-        const l = makeImg("l", "../src/images/golf_l.png");
+        const l = makeImg("l", titleImgs.golf_l);
         l.style.opacity = "0%";
-        const f = makeImg("f", "../src/images/golf_f.png");
+        const f = makeImg("f", titleImgs.golf_f);
         f.style.opacity = "0%";
 
         container.appendChild(g);
@@ -64,8 +66,8 @@ export const titlePage = (() => {
 
         const container = makeDiv([], "start");
 
-        const button = makeImg("button", "../src/images/button.png");
-        const text = makeImg("text", "../src/images/start.png");
+        const button = makeImg("button", titleImgs.button);
+        const text = makeImg("text", titleImgs.start);
 
         container.appendChild(button);
         container.appendChild(text);

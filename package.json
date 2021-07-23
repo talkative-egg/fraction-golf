@@ -1,5 +1,5 @@
 {
-  "name": "Fraction-Golf",
+  "name": "fraction-golf",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -12,6 +12,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "css-loader": "^6.2.0",
+    "style-loader": "^3.2.1",
     "webpack": "^5.46.0",
     "webpack-cli": "^4.7.2"
   },
