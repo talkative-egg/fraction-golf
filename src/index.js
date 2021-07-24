@@ -1,4 +1,6 @@
-import { titlePage } from './titleScreen/title';
-import './styles.css'
+import events from './events';
+import LoadPages from './loading/loadPages';
+import './styles.css';
 
-titlePage.start();
+
+events.emit("load", {"page": "titlePage"});

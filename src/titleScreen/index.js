@@ -1,6 +1,7 @@
-import { titleImgs } from "../loadImages";
+import { titleImgs } from "../loading/loadImages";
+import events from '../events';
 
-export const titlePage = (() => {
+const TitlePage = (() => {
 
     const body = document.querySelector("body");
 
@@ -84,7 +85,7 @@ export const titlePage = (() => {
         
     }
 
-    function start(){
+    function load(){
 
         const backgroundContainer = makeDiv([], "background");
 
@@ -141,12 +142,14 @@ export const titlePage = (() => {
 
             div.style.transition = "transform 1.5s ease-in-out 0.2s";
             div.style.transform = "translate(0px, -2500px)"; 
-            
-            setTimeout(function(){
-                div.remove();
-            }, 1200);
 
         });
+        
+        setTimeout(function(){
+            document.querySelector("#background").remove();
+        }, 1200);
+
+        events.emit("load", {"page": "demoLevel"});
 
     }
 
@@ -176,6 +179,8 @@ export const titlePage = (() => {
 
     }
 
-    return { start }
+    return { load };
 
 })();
+
+export default TitlePage;
