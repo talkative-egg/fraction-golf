@@ -1,5 +1,7 @@
 import events from '../events'
 
+import { goals } from '../loading/loadImages'
+
 const Goal = (parent, objTop = 300, objLeft = 300, goalNumber = 0) => {
 
     const fromTop = objTop;
@@ -14,6 +16,8 @@ const Goal = (parent, objTop = 300, objLeft = 300, goalNumber = 0) => {
     goal.style.height = `${height}px`;
     goal.style.borderRadius = "50%";
     goal.style.backgroundColor = "green";
+    // goal.style.background = `no-repeat url(${goals.goal})`;
+    // goal.style.backgroundSize = "100%";
     goal.style.position = "absolute";
     goal.style.left = `${fromLeft}px`;
     goal.style.top = `${fromTop}px`;

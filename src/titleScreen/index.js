@@ -150,6 +150,9 @@ const TitlePage = (() => {
         }, 1200);
 
         events.emit("load", {"page": "demoLevel"});
+        history.pushState({
+            id: 'titleScreen'
+        }, 'Home | Fraction Golf', 'http://talkative-egg.github.io/fraction-golf');
 
     }
 

@@ -18,6 +18,8 @@ import golf_f from "../images/golf_f.png";
 import start from "../images/start.png";
 import button from "../images/button.png";
 
+import goal from "../images/goal.png";
+
 export const titleImgs = {
     "frac": frac,
     "bar": bar,
@@ -40,4 +42,8 @@ export const balls = {
     "ball7": ball7,
     "ball8": ball8,
     "ball9": ball9,
+}
+
+export const goals = {
+    "goal": goal
 }

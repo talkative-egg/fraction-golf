@@ -329,7 +329,6 @@ const Ball = (parent, ballNumber = 0, top = false) => {
         window.removeEventListener("mouseup", unfollowMouse);
 
         ball.addEventListener("mousedown", drawLine);
-        grabMode = false;
 
     }
 
