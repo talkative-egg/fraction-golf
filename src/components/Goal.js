@@ -36,6 +36,7 @@ const Goal = (parent, objTop = 300, objLeft = 300, goalNumber = 0) => {
         const r = props.r;
         const id = props.id;
         const intervalId = props.intervalId
+        const ballNumber = props.number;
 
         const thisRadius = width / 2;
         const thisCenterX = fromLeft + (width) / 2;
@@ -43,9 +44,15 @@ const Goal = (parent, objTop = 300, objLeft = 300, goalNumber = 0) => {
 
         const radiusDistance = r + thisRadius
 
+        const correct = checkNumber(ballNumber);
+
         if(distance(cx, cy, thisCenterX, thisCenterY) < radiusDistance - 10){
-            events.emit("hitGoal", {"centerX": thisCenterX, "centerY": thisCenterY, id, intervalId});
-            events.off("ballMove", hitGoal)
+            events.emit("hitGoal", {"centerX": thisCenterX, "centerY": thisCenterY, 
+                                    id, intervalId, correct});
+            if(correct){
+                events.off("ballMove", hitGoal);
+            }
+            
         }
 
     }

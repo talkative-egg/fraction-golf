@@ -10,8 +10,8 @@ const Ball = (parent, ballNumber = 0, top = false) => {
 
     const ballId = uniqid();
 
-    const docHeight = document.documentElement.scrollHeight;
-    const docWidth = document.documentElement.scrollWidth;
+    let docHeight = document.documentElement.scrollHeight;
+    let docWidth = document.documentElement.scrollWidth;
 
     let fromTop = ((top)? getRandomInt(0, Math.floor(docHeight / 2)  - 10 - height)
                         : getRandomInt(Math.floor(docHeight / 2) + 10, docHeight - height));
@@ -56,6 +56,18 @@ const Ball = (parent, ballNumber = 0, top = false) => {
 
     }
 
+    const resetBall = () => {
+
+        fromTop = ((top)? getRandomInt(0, Math.floor(docHeight / 2)  - 10 - height)
+                        : getRandomInt(Math.floor(docHeight / 2) + 10, docHeight - height));
+        fromLeft = getRandomInt(0, 120);
+
+        vx = 0;
+        vy = 0;
+        ball.addEventListener("mousedown", grab);
+
+    }
+
     const nearZero = (num) => {
 
         return Math.abs(num) < 0.5;
@@ -97,15 +109,15 @@ const Ball = (parent, ballNumber = 0, top = false) => {
         const radius = distance(centerX, centerY, thisCenterX, thisCenterY);
 
         if(direction == 0){ //counterclockwise
-            fromLeft += Math.cos(angle) * radius * 0.5;
-            fromTop -= Math.sin(angle) * radius * 0.5;
+            fromLeft += Math.cos(angle) * radius * 0.4;
+            fromTop -= Math.sin(angle) * radius * 0.4;
         }else{ //clockwise
-            fromLeft -= Math.cos(angle) * radius * 0.5;
-            fromTop += Math.sin(angle) * radius * 0.5;
+            fromLeft -= Math.cos(angle) * radius * 0.4;
+            fromTop += Math.sin(angle) * radius * 0.4;
         }
         
-        fromLeft += (centerX - thisCenterX) * 0.25;
-        fromTop += (centerY - thisCenterY) * 0.25;
+        fromLeft += (centerX - thisCenterX) * 0.15;
+        fromTop += (centerY - thisCenterY) * 0.15;
 
         update();
 
@@ -133,7 +145,8 @@ const Ball = (parent, ballNumber = 0, top = false) => {
                                  "vx": vx,
                                  "vy": vy,
                                  "id": ballId,
-                                 "intervalId": intervalId});
+                                 "intervalId": intervalId,
+                                 "number": number});
         update();
 
         if(nearZero(vx) && nearZero(vy)){
@@ -148,6 +161,9 @@ const Ball = (parent, ballNumber = 0, top = false) => {
     }
 
     const checkScreenCollision = ({cx, cy, r, vx, vy, id}) => {
+
+        docHeight = document.documentElement.scrollHeight;
+        docWidth = document.documentElement.scrollWidth;
 
         if(cx + r + vx > docWidth){
             events.emit("collision", {axis: "x", direction: "negative", "id": id});
@@ -167,8 +183,6 @@ const Ball = (parent, ballNumber = 0, top = false) => {
 
         if(id !== ballId) return;
 
-        console.log(`axis: ${axis}, direction: ${direction}, id: ${id}`);
-
         if(axis === "x" && direction === "negative" && vx >= 0){
             vx *= -1
         }else if (axis === "x" && direction === "positive" && vx <= 0){
@@ -181,11 +195,12 @@ const Ball = (parent, ballNumber = 0, top = false) => {
 
     }
 
-    const moveToGoal = ({centerX, centerY, id, intervalId}) => {
+    const moveToGoal = ({centerX, centerY, id, intervalId, correct}) => {
 
         if(id !== ballId) return;
 
         clearInterval(intervalId);
+        ball.removeEventListener("mousedown", drawLine);
 
         const cx = fromLeft + width / 2;
         const cy = fromTop + height / 2;
@@ -210,9 +225,15 @@ const Ball = (parent, ballNumber = 0, top = false) => {
 
         update();
 
-        id = setInterval(spiral, 40, centerX, centerY, direction);
+        id = setInterval(spiral, 30, centerX, centerY, direction);
 
-        setTimeout(clearSpiral, 2000, id, centerX, centerY);
+        setTimeout(function(){
+            clearSpiral(id, centerX, centerY);
+            if(!correct){
+                resetBall();
+                update();
+            }
+        }, 2000);
 
     }
 
@@ -281,6 +302,8 @@ const Ball = (parent, ballNumber = 0, top = false) => {
         events.on("ballMove", checkScreenCollision);
         events.on("collision", reverseDirection);
         events.on("hitGoal", moveToGoal);
+
+        events.emit("ballReleased");
 
     }
 

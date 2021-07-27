@@ -87,6 +87,10 @@ const TitlePage = (() => {
 
     function load(){
 
+        if(document.querySelector("#background") != null){
+            document.querySelector("#background").remove();docWidth = document.documentElement.scrollWidth;
+        }
+
         const backgroundContainer = makeDiv([], "background");
 
         const blockContainer = makeBackgroundBlocks();
@@ -129,8 +133,7 @@ const TitlePage = (() => {
             buttonBackground.style.animation = "button 0.4s ease-out 1 forwards";
             buttonText.style.animation = "button 0.4s ease-out 1 forwards";
 
-        }, 1000)
-        
+        }, 1000);
 
     }
 
@@ -149,10 +152,7 @@ const TitlePage = (() => {
             document.querySelector("#background").remove();
         }, 1200);
 
-        events.emit("load", {"page": "demoLevel"});
-        history.pushState({
-            id: 'titleScreen'
-        }, 'Home | Fraction Golf', 'http://talkative-egg.github.io/fraction-golf');
+        events.emit("load", {"page": "levelSelect"});
 
     }
 
