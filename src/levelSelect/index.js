@@ -19,11 +19,19 @@ const LevelSelect = (() => {
             button.setAttribute("src", levelSelectImgs[`level${i}`]);
             button.classList.add("level-button");
 
-            button.addEventListener("click", function(){
-                // events.emit("load", {"page": `level${i}`});
-                events.emit("load", {"page": "demoLevel"});
-                document.querySelector("#level-select").remove()
-            });
+            if(i == 1){
+                button.addEventListener("click", function(){
+                    events.emit("load", {"page": "level1"});
+                });
+                
+            }else{
+                button.addEventListener("click", function(){
+                    // events.emit("load", {"page": `level${i}`});
+                    events.emit("load", {"page": "demoLevel"});
+                });
+            }
+
+            
 
             buttonContainer.appendChild(button);
 

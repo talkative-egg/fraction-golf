@@ -6,7 +6,7 @@ import events from '../events'
 
 const DemoLevel = (() => {
 
-    let pars = 0;
+    let strokes = 0;
 
     let docHeight = document.documentElement.scrollHeight;
     let docWidth = document.documentElement.scrollWidth;
@@ -41,8 +41,8 @@ const DemoLevel = (() => {
     function makeGrabArea(container){
 
         const top = document.createElement("div");
-        top.style.backgroundColor = "green";
-        top.style.zIndex = "-1";
+        top.style.backgroundColor = "#abd6ab";
+        top.style.zIndex = "0";
         top.style.width = "200px";
         top.style.height = `${Math.floor(docHeight / 2) - 10}px`;
         top.style.position = "absolute";
@@ -50,8 +50,8 @@ const DemoLevel = (() => {
         top.style.left = "0px";
 
         const bottom = document.createElement("div");
-        bottom.style.backgroundColor = "green";
-        bottom.style.zIndex = "-1";
+        bottom.style.backgroundColor = "#abd6ab";
+        bottom.style.zIndex = "0";
         bottom.style.width = "200px";
         bottom.style.height = `${Math.ceil(docHeight / 2) - 10}px`;
         bottom.style.position = "absolute";
@@ -80,11 +80,11 @@ const DemoLevel = (() => {
 
     function makeScore(container){
 
-        pars = 0;
+        strokes = 0;
 
         const scoreDisplay = document.createElement("p");
 
-        scoreDisplay.textContent = `Pars: ${pars}`;
+        scoreDisplay.textContent = `Strokes: ${strokes}`;
         scoreDisplay.id = "score-display";
         scoreDisplay.style.position = "absolute";
         scoreDisplay.style.top = "20px";
@@ -97,8 +97,8 @@ const DemoLevel = (() => {
 
     function incrementScore(){
 
-        pars += 1;
-        document.querySelector("#score-display").textContent = `Pars: ${pars}`;
+        strokes += 1;
+        document.querySelector("#score-display").textContent = `Strokes: ${strokes}`;
 
     }
 

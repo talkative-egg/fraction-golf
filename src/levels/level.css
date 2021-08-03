@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap');
+
+#outer-container{
+    width: 100vw;
+    height: 100vh;
+    background-color: #4b8c46;
+    position: absolute;
+    overflow: none;
+    z-index: -1;
+}
+
+#score-display{
+    font-size: 2rem;
+    top: 1.1rem;
+    left: 1.6rem;
+    position: absolute;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+#star-container{
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin: 0.3rem auto;
+}
+
+.star{
+    width: 3rem;
+    height: 3rem;
+    max-height: 9vh;
+}
+
+#settings{
+    width: 5rem;
+    height: 5rem;
+    top: 1.1rem;
+    right: 1.6rem;
+    position: absolute;
+    background-color: #4b8c46;
+}
+
+#settings:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+#equal-sign{
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 7rem;
+    font-size: 5rem;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+#fraction-container{
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    right: 2rem;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+#fraction-container p{
+    font-size: 6rem;
+}
+
+@media(max-width: 1250px){
+    #fraction-container{
+        right: 0.5rem;
+    }
+
+    #fraction-container p{
+        font-size: 4rem;
+    }
+
+    #equal-sign{
+        right: 5rem;
+        font-size: 3.5rem;
+    }
+}
+
+#fraction-container #fraction-bar{
+    width: 4rem;
+    height: 0.5rem;
+    background-color: black;
+    color: black;
+    border: none;
+}
+
+#game-container{
+    width: 75vw;
+    height: 80vh;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #22b14c;
+    border-radius: 20px;
+}

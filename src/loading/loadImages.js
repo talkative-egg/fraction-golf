@@ -33,6 +33,9 @@ import levelSelectLevel9 from "../images/levelSelect/9.png";
 import levelSelectTitle from "../images/levelSelect/level-select.png";
 import levelSelectSettings from "../images/levelSelect/settings.png";
 
+import starUnfilled from "../images/star-unfilled.png";
+import starFilled from "../images/star-filled.png";
+
 export const titleImgs = {
     "frac": frac,
     "bar": bar,
@@ -74,4 +77,10 @@ export const levelSelectImgs = {
     "level7": levelSelectLevel7,
     "level8": levelSelectLevel8,
     "level9": levelSelectLevel9,
+}
+
+export const icons = {
+    "settings": levelSelectSettings,
+    "star-filled": starFilled,
+    "star-unfilled": starUnfilled
 }

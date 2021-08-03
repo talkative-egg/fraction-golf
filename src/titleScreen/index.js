@@ -87,10 +87,6 @@ const TitlePage = (() => {
 
     function load(){
 
-        if(document.querySelector("#background") != null){
-            document.querySelector("#background").remove();docWidth = document.documentElement.scrollWidth;
-        }
-
         const backgroundContainer = makeDiv([], "background");
 
         const blockContainer = makeBackgroundBlocks();
@@ -126,7 +122,9 @@ const TitlePage = (() => {
             const buttonBackground = buttonContainer.querySelector("#button");
             const buttonText = buttonContainer.querySelector("#text");
 
-            buttonContainer.addEventListener("click", transition);
+            buttonContainer.addEventListener("click", function(){
+                events.emit("load", {"page": "levelSelect"});
+            });
 
             backgroundContainer.appendChild(buttonContainer);
 
@@ -151,8 +149,6 @@ const TitlePage = (() => {
         setTimeout(function(){
             document.querySelector("#background").remove();
         }, 1200);
-
-        events.emit("load", {"page": "levelSelect"});
 
     }
 
@@ -182,7 +178,7 @@ const TitlePage = (() => {
 
     }
 
-    return { load };
+    return { load, transition };
 
 })();
 
