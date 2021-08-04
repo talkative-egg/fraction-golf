@@ -240,8 +240,18 @@ const Ball = (initialParent, parent, ballNumber = 0, top = false) => {
         setTimeout(function(){
             clearSpiral(id, centerX, centerY);
             if(!correct){
-                resetBall();
+
+                const gameHeight = parent.offsetHeight;
+                
+                fromTop = (topBall)? gameHeight / 4 - height + height / 2
+                                    : gameHeight * 3 / 4 - height / 2;
+                fromLeft = 40;
+
                 update();
+            }else{
+
+                events.off("resetBall", moveBack);
+
             }
         }, 2000);
 

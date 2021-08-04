@@ -143,6 +143,100 @@ const Level1 = (() => {
 
     }
 
+    function makeStartingPopup(container){
+
+        const star = document.createElement("img");
+        star.setAttribute("src", icons["star-filled"]);
+
+        const popupContainer = document.createElement("div");
+        popupContainer.id = "start-popup"
+
+        const title = document.createElement("p");
+        title.textContent = "Level 1";
+        title.id = "start-popup-title";
+
+        const threeStarOuterContainer = document.createElement("div");
+        threeStarOuterContainer.classList.add("star-outer-container");
+
+        const threeStarInnerContainer = document.createElement("div");
+        threeStarInnerContainer.classList.add("star-inner-container");
+
+        threeStarInnerContainer.appendChild(star.cloneNode(true));
+        threeStarInnerContainer.appendChild(star.cloneNode(true));
+        threeStarInnerContainer.appendChild(star.cloneNode(true));
+
+        threeStarOuterContainer.appendChild(threeStarInnerContainer);
+
+        const threeStarText = document.createElement("p");
+        threeStarText.textContent = `< ${threeStar} strokes`;
+        
+        threeStarOuterContainer.appendChild(threeStarText);
+
+
+        const twoStarOuterContainer = document.createElement("div");
+        twoStarOuterContainer.classList.add("star-outer-container");
+
+        const twoStarInnerContainer = document.createElement("div");
+        twoStarInnerContainer.classList.add("star-inner-container");
+
+        twoStarInnerContainer.appendChild(star.cloneNode(true));
+        twoStarInnerContainer.appendChild(star.cloneNode(true));
+
+        twoStarOuterContainer.appendChild(twoStarInnerContainer);
+
+        const twoStarText = document.createElement("p");
+        twoStarText.textContent = `< ${twoStar} strokes`;
+
+        twoStarOuterContainer.appendChild(twoStarText);
+
+
+        const oneStarOuterContainer = document.createElement("div");
+        oneStarOuterContainer.classList.add("star-outer-container");
+
+        const oneStarInnerContainer = document.createElement("div");
+        oneStarInnerContainer.classList.add("star-inner-container");
+
+        oneStarInnerContainer.appendChild(star.cloneNode(true));
+
+        oneStarOuterContainer.appendChild(oneStarInnerContainer);
+
+        const oneStarText = document.createElement("p");
+        oneStarText.textContent = `< ${oneStar} strokes`;
+
+        oneStarOuterContainer.appendChild(oneStarText);
+
+        const button = document.createElement("button");
+        button.textContent = "Got it!"
+        button.id = "start-popup-button";
+
+        popupContainer.appendChild(title);
+        popupContainer.appendChild(threeStarOuterContainer);
+        popupContainer.appendChild(twoStarOuterContainer);
+        popupContainer.appendChild(oneStarOuterContainer);
+        popupContainer.appendChild(button);
+
+        container.appendChild(popupContainer);
+
+        setTimeout(function(){
+            window.addEventListener("click", removeStartingPopup);
+        }, 50);
+
+    }
+
+    function removeStartingPopup(){
+
+        window.removeEventListener("click", removeStartingPopup);
+
+        const startPopup = document.querySelector("#start-popup");
+
+        startPopup.style.animation = "slideOutToBottom 0.5s ease-in-out forwards";
+
+        startPopup.addEventListener("animationend", function(){
+            startPopup.remove();
+        });
+
+    }
+
     function load(){
 
         docHeight = document.documentElement.scrollHeight;
@@ -182,10 +276,10 @@ const Level1 = (() => {
         Ball(container, gameContainer, 6, false);
 
         //top goal
-        Goal(gameContainer, gameWidth - 50, gameHeight / 2 - 60, 2);
+        Goal(gameContainer, gameWidth - 50, gameHeight / 2 - 60, topGoalNum);
 
         //bottom goal
-        Goal(gameContainer, gameWidth - 50, gameHeight / 2 + 60, 8);
+        Goal(gameContainer, gameWidth - 50, gameHeight / 2 + 60, bottomGoalNum);
         
         //central wall
         Wall(gameContainer, gameHeight / 2 - 5, 0, gameWidth, 10);
@@ -199,6 +293,7 @@ const Level1 = (() => {
         Wall(gameContainer, gameHeight - gameHeight / 4, gameWidth * 2 / 5, 70, gameHeight / 4);
         Wall(gameContainer, gameHeight / 2, gameWidth * 3 / 5, 40, gameHeight / 3);
         
+        makeStartingPopup(container);
 
         events.on("ballReleased", incrementStroke);
 
