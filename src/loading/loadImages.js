@@ -35,6 +35,8 @@ import levelSelectSettings from "../images/levelSelect/settings.png";
 
 import starUnfilled from "../images/star-unfilled.png";
 import starFilled from "../images/star-filled.png";
+import levelHome from "../images/home.png";
+import levelRestart from "../images/restart.png"
 
 export const titleImgs = {
     "frac": frac,
@@ -82,5 +84,7 @@ export const levelSelectImgs = {
 export const icons = {
     "settings": levelSelectSettings,
     "star-filled": starFilled,
-    "star-unfilled": starUnfilled
+    "star-unfilled": starUnfilled,
+    "home": levelHome,
+    "restart": levelRestart
 }

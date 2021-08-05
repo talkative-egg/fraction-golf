@@ -104,7 +104,7 @@
     border-radius: 20px;
 }
 
-#start-popup{
+.level-popup{
     position: absolute;
     background-color: #f5e2e2de;
     left: 50%;
@@ -119,38 +119,76 @@
     animation: slideInFromTop 0.5s ease-in-out;
 }
 
-#start-popup img{
+.level-popup img{
     width: 2.7rem;
     height: 2.7rem;
 }
 
-#start-popup #start-popup-title{
+.level-popup h2{
     font-size: 3rem;
 }
 
-#start-popup .star-outer-container{
+.level-popup .star-outer-container{
     margin-top: 2rem;
     display: flex;
     justify-content: space-between;
 }
 
-#start-popup p{
+.level-popup p{
     font-size: 2rem;
 }
 
-#start-popup button{
-    margin-top: 1.5rem;
-    float: right;
-    font-size: 1.2rem;
-    padding: 0.7rem 1rem;
-    border: none;
-    border-radius: 15px;
-    background-color: #babad4;
+.level-button-container{
+    margin-top: 1.8rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
 }
 
-#start-popup button:hover{
+.level-popup-button{
+    font-size: 1.2rem;
+    padding: 0.7rem 1rem;
+    background-color: #babad4;
+    border: none;
+    border-radius: 15px;
+    margin-right: auto;
+}
+
+.level-popup-button:hover{
     cursor: pointer;
     background-color: #9a9acf;
+}
+
+.level-button-container img{
+    width: 3rem;
+    height: 2.8rem;
+}
+
+.level-button-container img:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.game-end-container .game-end-level{
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.game-end-container h2{
+    margin-bottom: 2.5rem;
+}
+
+#game-end-star-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+#game-end-star-container img{
+    width: 6rem;
+    height: 6rem;
 }
 
 @keyframes slideInFromTop{

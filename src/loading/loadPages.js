@@ -11,7 +11,7 @@ const LoadPages = (() => {
 
     const loadPage = (props) => {
 
-        if(currentPage == props.page) return;
+        // if(currentPage == props.page) return;
 
         if(currentPage == "titlePage"){
             TitlePage.transition();
@@ -45,6 +45,9 @@ const LoadPages = (() => {
                 Level1.load();
                 break
             default:
+                currentPage = "demoLevel";
+                history.pushState({pageID: 'demoLevel'}, 'demoLevel', '#demoLevel');
+                DemoLevel.load();
                 break;
 
         }

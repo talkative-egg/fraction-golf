@@ -207,6 +207,8 @@ const Ball = (initialParent, parent, ballNumber = 0, top = false) => {
 
     const moveToGoal = ({centerX, centerY, id, intervalId, correct}) => {
 
+        events.off("hitGoal", moveToGoal);
+
         if(id !== ballId) return;
 
         clearInterval(intervalId);
@@ -249,7 +251,7 @@ const Ball = (initialParent, parent, ballNumber = 0, top = false) => {
 
                 update();
             }else{
-
+                
                 events.off("resetBall", moveBack);
 
             }

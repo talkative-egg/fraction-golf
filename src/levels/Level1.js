@@ -16,11 +16,15 @@ const Level1 = (() => {
     const twoStar = 7;
     const oneStar = 9;
 
+    const level = 1;
+
     let docHeight = document.documentElement.scrollHeight;
     let docWidth = document.documentElement.scrollWidth;
 
     let topGoalNum = 2;
     let bottomGoalNum = 8;
+
+    let correctCount = 0;
 
     function createLines(container){
 
@@ -64,6 +68,9 @@ const Level1 = (() => {
         const settings = document.createElement("img");
         settings.setAttribute("src", icons.settings);
         settings.id = "settings";
+
+        settings.container = container;
+        settings.addEventListener("click", makeStartingPopup);
 
         container.appendChild(settings);
 
@@ -138,21 +145,175 @@ const Level1 = (() => {
         }
         
         if(strokes > oneStar){
-            events.emit("gameOver", {"status": "lost"});
+            events.emit("gameOver", {"status": "lost", "star": 0});
         }
+
+    }
+
+    function incrementCorrectCount({ correct }){
+
+        if(!correct) return;
+
+        correctCount += 1;
+
+        if(correctCount >= 2){
+
+            let star = 0;
+
+            if(strokes <= threeStar){
+                star = 3
+            }else if(strokes <= twoStar){
+                star = 2;
+            }else{
+                star = 1;
+            }
+
+            setTimeout(function(){
+                events.emit("gameOver", { "status": "win", "star": star });
+            }, 2000);
+            
+        }
+
+    }
+
+    function makeWinningPopup(star, container){
+
+        document.querySelector("#settings").removeEventListener("click", makeStartingPopup);
+
+        const starImg = document.createElement("img");
+        starImg.setAttribute("src", icons["star-filled"]);
+
+        const starUnfilled = document.createElement("img");
+        starUnfilled.setAttribute("src", icons["star-unfilled"]);
+
+        const popupContainer = document.createElement("div");
+        popupContainer.className = "level-popup game-end-container";
+
+        const levelName = document.createElement("p");
+        levelName.className = "game-end-level";
+        levelName.textContent = `Level ${level}`;
+
+        const title = document.createElement("h2");
+        title.className = "game-end-title";
+        title.textContent = "Congratulations!!";
+
+        const starContainer = document.createElement("div");
+        starContainer.id = "game-end-star-container";
+
+        for(let i = 0; i < 3; i++){
+
+            if(i < star){
+                starContainer.appendChild(starImg.cloneNode(true))
+            }else{
+                starContainer.appendChild(starUnfilled.cloneNode(true));
+            }
+
+        }
+
+        const buttonContainer = document.createElement("button-container");
+        buttonContainer.className = "level-button-container";
+
+        const button = document.createElement("button");
+        button.textContent = "Next Level!"
+        button.className = "level-popup-button";
+
+        button.addEventListener("click", function(e){
+            e.preventDefault();
+            events.emit("load", { "page": `level${level + 1}` });
+        })
+
+        const restart = document.createElement("img");
+        restart.setAttribute("src", icons.restart);
+        restart.className = "restart-button";
+
+        restart.addEventListener("click", function(){
+            events.emit("load", { "page": `level${level}` });
+        })
+
+        const home = document.createElement("img");
+        home.setAttribute("src", icons.home);
+        home.className = "home-button";
+
+        home.addEventListener("click", function(){
+            events.emit("load", { "page": "levelSelect" });
+        });
+
+        buttonContainer.appendChild(button);
+        buttonContainer.appendChild(restart);
+        buttonContainer.appendChild(home);
+
+        popupContainer.appendChild(levelName);
+        popupContainer.appendChild(title);
+        popupContainer.appendChild(starContainer);
+        popupContainer.appendChild(buttonContainer);
+
+        container.appendChild(popupContainer);
+
+    }
+
+    function makeLosingPopup(container){
+
+        document.querySelector("#settings").removeEventListener("click", makeStartingPopup);
+
+        const popupContainer = document.createElement("div");
+        popupContainer.className = "level-popup game-end-container";
+
+        const levelName = document.createElement("p");
+        levelName.className = "game-end-level";
+        levelName.textContent = `Level ${level}`;
+
+        const title = document.createElement("h2");
+        title.className = "game-end-title";
+        title.textContent = "Game Over";
+
+        const consolation = document.createElement("p");
+        consolation.id = "game-lose-text";
+        consolation.textContent = "Try again?";
+
+        const buttonContainer = document.createElement("button-container");
+        buttonContainer.className = "level-button-container";
+
+        const restart = document.createElement("img");
+        restart.setAttribute("src", icons.restart);
+        restart.className = "restart-button";
+
+        restart.addEventListener("click", function(){
+            events.emit("load", { "page": `level${level}` });
+        })
+
+        const home = document.createElement("img");
+        home.setAttribute("src", icons.home);
+        home.className = "home-button";
+
+        home.addEventListener("click", function(){
+            events.emit("load", { "page": "levelSelect" });
+        });
+
+        buttonContainer.appendChild(restart);
+        buttonContainer.appendChild(home);
+
+        popupContainer.appendChild(levelName);
+        popupContainer.appendChild(title);
+        popupContainer.appendChild(consolation);
+        popupContainer.appendChild(buttonContainer);
+
+        container.appendChild(popupContainer);
 
     }
 
     function makeStartingPopup(container){
 
+        container = (container instanceof Event)? container.currentTarget.container : container;
+
         const star = document.createElement("img");
         star.setAttribute("src", icons["star-filled"]);
 
         const popupContainer = document.createElement("div");
+        popupContainer.className = "level-popup";
         popupContainer.id = "start-popup"
 
-        const title = document.createElement("p");
-        title.textContent = "Level 1";
+        const title = document.createElement("h2");
+        title.textContent = `Level ${level}`;
         title.id = "start-popup-title";
 
         const threeStarOuterContainer = document.createElement("div");
@@ -205,15 +366,38 @@ const Level1 = (() => {
 
         oneStarOuterContainer.appendChild(oneStarText);
 
+        const buttonContainer = document.createElement("button-container");
+        buttonContainer.className = "level-button-container";
+
         const button = document.createElement("button");
         button.textContent = "Got it!"
-        button.id = "start-popup-button";
+        button.className = "level-popup-button";
+
+        const restart = document.createElement("img");
+        restart.setAttribute("src", icons.restart);
+        restart.className = "restart-button";
+
+        restart.addEventListener("click", function(){
+            events.emit("load", { "page": `level${level}` });
+        })
+
+        const home = document.createElement("img");
+        home.setAttribute("src", icons.home);
+        home.className = "home-button";
+
+        home.addEventListener("click", function(){
+            events.emit("load", { "page": "levelSelect" });
+        });
+
+        buttonContainer.appendChild(button);
+        buttonContainer.appendChild(restart);
+        buttonContainer.appendChild(home);
 
         popupContainer.appendChild(title);
         popupContainer.appendChild(threeStarOuterContainer);
         popupContainer.appendChild(twoStarOuterContainer);
         popupContainer.appendChild(oneStarOuterContainer);
-        popupContainer.appendChild(button);
+        popupContainer.appendChild(buttonContainer);
 
         container.appendChild(popupContainer);
 
@@ -223,7 +407,7 @@ const Level1 = (() => {
 
     }
 
-    function removeStartingPopup(){
+    function removeStartingPopup(e){
 
         window.removeEventListener("click", removeStartingPopup);
 
@@ -238,6 +422,12 @@ const Level1 = (() => {
     }
 
     function load(){
+
+        window.removeEventListener("click", removeStartingPopup);
+
+        strokes = 0;
+        correctCount = 0;
+        events.off("ballReleased", incrementStroke);
 
         docHeight = document.documentElement.scrollHeight;
         docWidth = document.documentElement.scrollWidth;
@@ -296,6 +486,18 @@ const Level1 = (() => {
         makeStartingPopup(container);
 
         events.on("ballReleased", incrementStroke);
+
+        events.on("gameOver", function({ status, star }){
+
+            if(status === "win"){
+                makeWinningPopup(star, container);
+            }else{
+                makeLosingPopup(container);
+            }
+
+        });
+
+        events.on("hitGoal", incrementCorrectCount);
 
     }
 
