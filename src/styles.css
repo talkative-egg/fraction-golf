@@ -29,8 +29,8 @@ main{
 
 .background-block{
     position: relative;
-    width: 150rem;
-    height: 22.5rem;
+    width: 200vw;
+    height: 45vh;
     opacity: 0%;
 }
 
@@ -83,7 +83,7 @@ main{
         margin-left: 0;
         margin-bottom: 0;
         margin-right: 0;
-        transform: rotate(-28deg) translate(-18.75rem, -37.5rem);
+        transform: rotate(-28deg) translate(-20%, -210%);
         opacity: 100%;
     }
 

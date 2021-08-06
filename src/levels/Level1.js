@@ -12,9 +12,11 @@ const Level1 = (() => {
 
     let strokes = 0;
 
-    const threeStar = 5;
-    const twoStar = 7;
-    const oneStar = 9;
+    let outerContainer;
+
+    const threeStar = 7;
+    const twoStar = 10;
+    const oneStar = 13;
 
     const level = 1;
 
@@ -152,7 +154,12 @@ const Level1 = (() => {
 
     function incrementCorrectCount({ correct }){
 
-        if(!correct) return;
+        if(correct){
+            makeGoalPopup("Nice Shot!");
+        }else{
+            makeGoalPopup("Not Quite");
+            return;
+        }
 
         correctCount += 1;
 
@@ -173,6 +180,25 @@ const Level1 = (() => {
             }, 2000);
             
         }
+
+    }
+
+    function makeGoalPopup(textContent){
+
+        const popupContainer = document.createElement("div");
+        popupContainer.id = "goal-popup";
+
+        const text = document.createElement("p");
+        text.id = "goal-popup-text";
+        text.textContent = textContent;
+
+        popupContainer.appendChild(text);
+
+        outerContainer.appendChild(popupContainer);
+
+        setTimeout(function(){
+            popupContainer.remove();
+        }, 2000);
 
     }
 
@@ -378,7 +404,7 @@ const Level1 = (() => {
         restart.className = "restart-button";
 
         restart.addEventListener("click", function(){
-            events.emit("load", { "page": `level${level}` });
+            events.emit("load", { "page": `level${level}`, "makePopup": false });
         })
 
         const home = document.createElement("img");
@@ -421,49 +447,50 @@ const Level1 = (() => {
 
     }
 
-    function load(){
+    function load(makePopup = true){
 
         window.removeEventListener("click", removeStartingPopup);
 
         strokes = 0;
         correctCount = 0;
         events.off("ballReleased", incrementStroke);
+        events.off("hitGoal", incrementCorrectCount);
 
         docHeight = document.documentElement.scrollHeight;
         docWidth = document.documentElement.scrollWidth;
 
-        const container = document.createElement("div");
-        container.id = "outer-container";
+        outerContainer = document.createElement("div");
+        outerContainer.id = "outer-container";
 
         setTimeout(function(){
-            container.style.zIndex = "0";
+            outerContainer.style.zIndex = "0";
         }, 1000);
 
         
-        makeScore(container);
-        makeSettings(container);
-        makeStars(container);
-        makeFraction(container);
+        makeScore(outerContainer);
+        makeSettings(outerContainer);
+        makeStars(outerContainer);
+        makeFraction(outerContainer);
 
-        document.querySelector("body").appendChild(container);
+        document.querySelector("body").appendChild(outerContainer);
 
         const gameContainer = document.createElement("div");
         gameContainer.id = "game-container";
 
         createLines(gameContainer);
 
-        container.appendChild(gameContainer);
+        outerContainer.appendChild(gameContainer);
 
         const gameHeight = gameContainer.offsetHeight;
         const gameWidth = gameContainer.offsetWidth;
 
         //top balls
-        Ball(container, gameContainer, 2, true);
-        Ball(container, gameContainer, 3, true);
+        Ball(outerContainer, gameContainer, 2, true);
+        Ball(outerContainer, gameContainer, 3, true);
 
         //bottom balls
-        Ball(container, gameContainer, 8, false);
-        Ball(container, gameContainer, 6, false);
+        Ball(outerContainer, gameContainer, 8, false);
+        Ball(outerContainer, gameContainer, 6, false);
 
         //top goal
         Goal(gameContainer, gameWidth - 50, gameHeight / 2 - 60, topGoalNum);
@@ -483,16 +510,19 @@ const Level1 = (() => {
         Wall(gameContainer, gameHeight - gameHeight / 4, gameWidth * 2 / 5, 70, gameHeight / 4);
         Wall(gameContainer, gameHeight / 2, gameWidth * 3 / 5, 40, gameHeight / 3);
         
-        makeStartingPopup(container);
+        if(makePopup){
+            makeStartingPopup(outerContainer);
+        }
 
         events.on("ballReleased", incrementStroke);
 
         events.on("gameOver", function({ status, star }){
 
             if(status === "win"){
-                makeWinningPopup(star, container);
+                events.emit("levelWin", { "level": level, "star": star });
+                makeWinningPopup(star, outerContainer);
             }else{
-                makeLosingPopup(container);
+                makeLosingPopup(outerContainer);
             }
 
         });

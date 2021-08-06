@@ -3,4 +3,4 @@ import LoadPages from './loading/loadPages';
 import './styles.css';
 
 
-events.emit("load", {"page": "level1"});
+events.emit("load", {"page": "titlePage"});

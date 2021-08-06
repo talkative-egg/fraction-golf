@@ -1,9 +1,12 @@
-import { levelSelectImgs } from '../loading/loadImages';
+import { levelSelectImgs, icons } from '../loading/loadImages';
 import './styles.css';
 
 import events from '../events'
 
 const LevelSelect = (() => {
+
+    let levelPassed = 0;
+    let levelStars = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
     function makeButtons(container){
 
@@ -15,25 +18,61 @@ const LevelSelect = (() => {
 
         for(let i = 1; i <= 9; i++){
 
+            const singleButtonContainer = document.createElement("div");
+            singleButtonContainer.classList.add("level-select-button-outer");
+
             const button = document.createElement("img");
-            button.setAttribute("src", levelSelectImgs[`level${i}`]);
             button.classList.add("level-button");
 
-            if(i == 1){
-                button.addEventListener("click", function(){
-                    events.emit("load", {"page": "level1"});
+            if(i - 1 <= levelPassed){
+
+                singleButtonContainer.classList.add("unlocked-level-outer");
+
+                singleButtonContainer.addEventListener("click", function(){
+                    events.emit("load", {"page": `level${i}`});
                 });
-                
+
+                button.setAttribute("src", levelSelectImgs[`level${i}`]);
+
             }else{
-                button.addEventListener("click", function(){
-                    // events.emit("load", {"page": `level${i}`});
-                    events.emit("load", {"page": "demoLevel"});
-                });
+
+                button.setAttribute("src", levelSelectImgs.locked);
+
             }
 
-            
+            singleButtonContainer.appendChild(button);
 
-            buttonContainer.appendChild(button);
+            if(levelStars[i - 1] > 0){
+
+                const starContainer = document.createElement("div");
+                starContainer.className = "level-select-star-container";
+
+                const thisStars = levelStars[i - 1]
+
+                const starImg = document.createElement("img");
+                starImg.setAttribute("src", icons["star-filled"]);
+                starImg.className = "level-select-star"
+
+                const starUnfilled = document.createElement("img");
+                starUnfilled.setAttribute("src", icons["star-unfilled"]);
+                starUnfilled.className = "level-select-star";
+
+                for(let j = 0; j < 3; j++){
+                    
+                    if(j < thisStars){
+                        starContainer.appendChild(starImg.cloneNode(true))
+                    }else{
+                        starContainer.appendChild(starUnfilled.cloneNode(true));
+                    }
+
+                }
+
+                singleButtonContainer.appendChild(starContainer);
+                
+
+            }
+
+            buttonContainer.appendChild(singleButtonContainer);
 
         }
 
@@ -63,6 +102,18 @@ const LevelSelect = (() => {
 
     }
 
+    function updateLevels({ level, star }){
+
+        if(levelStars[level - 1] === 0){
+            levelPassed++
+        }
+
+        if(star > levelStars[level - 1]){
+            levelStars[level - 1] = star;
+        }
+
+    }
+
     function load(){
 
         const body = document.querySelector("body");
@@ -85,6 +136,8 @@ const LevelSelect = (() => {
         body.prepend(container);
         
     }
+
+    events.on("levelWin", updateLevels);
 
     return { load };
 

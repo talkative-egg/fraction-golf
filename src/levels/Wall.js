@@ -1,6 +1,6 @@
 import events from '../events'
 
-const Wall = (parent, objTop, objLeft, objWidth, objHeight, color = "#4b8c46") => {
+const Wall = (parent, objTop, objLeft, objWidth, objHeight, color = "#294c27") => {
 
     const fromTop = objTop;
     const fromLeft = objLeft;

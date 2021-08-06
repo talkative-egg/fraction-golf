@@ -42,7 +42,7 @@ const LoadPages = (() => {
             case "level1":
                 currentPage = "level1";
                 history.pushState({pageID: 'level1'}, 'level1', '#level1');
-                Level1.load();
+                Level1.load(props.makePopup);
                 break
             default:
                 currentPage = "demoLevel";

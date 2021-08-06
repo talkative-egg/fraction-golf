@@ -39,12 +39,33 @@
     }
 }
 
-.level-button{
+.level-select-button-outer{
+    position: relative;
     width: 17%;
     max-height: 30%;
 }
 
-.level-button:hover{
+.level-button{
+    position: relative;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.level-select-star-container{
+    position: absolute;
+    bottom: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.2rem;
+}
+
+.level-select-star{
+    width: 20%;
+}
+
+.unlocked-level-outer:hover{
     transform: scale(1.05);
     cursor: pointer;
 }

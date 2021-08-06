@@ -20,7 +20,7 @@ import button from "../images/button.png";
 
 import goal from "../images/goal.png";
 
-import levelSelectBackground from "../images/levelSelect/background-1.png";
+import levelSelectBackground from "../images/levelSelect/background-2.png";
 import levelSelectLevel1 from "../images/levelSelect/1.png";
 import levelSelectLevel2 from "../images/levelSelect/2.png";
 import levelSelectLevel3 from "../images/levelSelect/3.png";
@@ -30,6 +30,7 @@ import levelSelectLevel6 from "../images/levelSelect/6.png";
 import levelSelectLevel7 from "../images/levelSelect/7.png";
 import levelSelectLevel8 from "../images/levelSelect/8.png";
 import levelSelectLevel9 from "../images/levelSelect/9.png";
+import levelSelectLevelLocked from "../images/levelSelect/locked-level.png";
 import levelSelectTitle from "../images/levelSelect/level-select.png";
 import levelSelectSettings from "../images/levelSelect/settings.png";
 
@@ -79,6 +80,7 @@ export const levelSelectImgs = {
     "level7": levelSelectLevel7,
     "level8": levelSelectLevel8,
     "level9": levelSelectLevel9,
+    "locked": levelSelectLevelLocked
 }
 
 export const icons = {

@@ -318,6 +318,9 @@ const Ball = (initialParent, parent, ballNumber = 0, top = false) => {
         dashedLine.setAttribute("x2", `${0}`);
         dashedLine.setAttribute("y2", `${0}`);
 
+        if((xVelocity <= width / 2 && xVelocity >= -width / 2) && (yVelocity <= height / 2 && yVelocity >= -height / 2)) return;
+        if(xVelocity === NaN || yVelocity === NaN) return;
+
         resetVelocity(xVelocity / 7, yVelocity / 7);
 
         const intervalId = setInterval(function(){
@@ -345,6 +348,8 @@ const Ball = (initialParent, parent, ballNumber = 0, top = false) => {
     }
 
     const moveToArea = (e) => {
+
+        ball.removeEventListener("click", moveToArea);
 
         const gameHeight = parent.offsetHeight;
 
@@ -385,6 +390,8 @@ const Ball = (initialParent, parent, ballNumber = 0, top = false) => {
     const moveBack = ({position}) => {
 
         if(ball.classList.contains(`${position}-ball`)){
+
+            ball.addEventListener("click", moveToArea);
 
             resetBall();
 
