@@ -13,13 +13,17 @@ const LoadPages = (() => {
 
         // if(currentPage == props.page) return;
 
-        if(currentPage == "titlePage"){
+        if(currentPage === "titlePage"){
             TitlePage.transition();
         }else if(document.querySelectorAll("body *") != null){
             document.querySelectorAll("body *").forEach(function(element){
                 element.remove();
             });
-            
+        }
+
+        switch(currentPage){
+            case "level1":
+                Level1.deleteAllObjects();
         }
 
         switch(props.page){

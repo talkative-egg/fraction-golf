@@ -63,9 +63,15 @@ const Goal = (parent, cx, cy, goalNumber = 0) => {
 
     }
 
+    const remove = () => {
+        events.off("ballMove", hitGoal);
+    }
+
     parent.appendChild(goal);
 
     events.on("ballMove", hitGoal);
+
+    return { remove };
 
 }
 

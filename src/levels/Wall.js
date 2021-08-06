@@ -1,6 +1,6 @@
 import events from '../events'
 
-const Wall = (parent, objTop, objLeft, objWidth, objHeight, color = "#294c27") => {
+const Wall = (parent, objTop, objLeft, objWidth, objHeight, centerWall = false) => {
 
     const fromTop = objTop;
     const fromLeft = objLeft;
@@ -8,8 +8,14 @@ const Wall = (parent, objTop, objLeft, objWidth, objHeight, color = "#294c27") =
     const height = objHeight;
 
     const wall = document.createElement("div");
+
+    if(centerWall){
+        wall.className = "center-wall";
+    }else{
+        wall.className = "pillar"
+    }
+    
     wall.style.position = "absolute";
-    wall.style.backgroundColor = color;
     wall.style.width = `${width}px`;
     wall.style.height = `${height}px`;
     wall.style.left = `${fromLeft}px`;
@@ -39,9 +45,15 @@ const Wall = (parent, objTop, objLeft, objWidth, objHeight, color = "#294c27") =
 
     }
 
+    const remove = () => {
+        events.off("ballMove", checkCollision);
+    }
+
     events.on("ballMove", checkCollision);
 
     parent.appendChild(wall);
+
+    return { remove };
 
 }
 

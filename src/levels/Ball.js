@@ -405,6 +405,13 @@ const Ball = (initialParent, parent, ballNumber = 0, top = false) => {
 
     }
 
+    const remove = () => {
+        events.off("resetBall", moveBack);
+        events.off("ballMove", checkScreenCollision);
+        events.off("collision", reverseDirection);
+        events.off("hitGoal", moveToGoal);
+    }
+
     ball.addEventListener("click", moveToArea);
 
     ball.addEventListener("mouseenter", hover);

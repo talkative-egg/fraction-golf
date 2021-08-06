@@ -220,6 +220,14 @@
     animation: slideInFromLeft 2s ease-in-out;
 }
 
+.pillar{
+    background: #294c27 url("../images/pillar.png") repeat 0 0/100%;
+}
+
+.center-wall{
+    background: #58a251;
+}
+
 @keyframes slideInFromTop{
 
     0%{

@@ -20,13 +20,63 @@ const Level1 = (() => {
 
     const level = 1;
 
+    let allObjects = [];
+
     let docHeight = document.documentElement.scrollHeight;
     let docWidth = document.documentElement.scrollWidth;
 
-    let topGoalNum = 2;
-    let bottomGoalNum = 8;
+    let topGoalNum, bottomGoalNum, topBalls, bottomBalls;
+    let prevTopNum = 0;
+    let prevBottomNum = 0
+    
+    generateFraction();
 
     let correctCount = 0;
+
+    function getRandomInt(min, max, notNum = []) {
+
+        const num = Math.floor(Math.random() * (max - min)) + min;
+
+        if(notNum.includes(num)){
+            return getRandomInt(min, max, notNum);
+        }else{
+            return num;
+        }
+
+    }
+
+    function generateFraction(){
+
+        topGoalNum = getRandomInt(1, 10);
+        bottomGoalNum = getRandomInt(1, 10);
+
+        if(topGoalNum === bottomGoalNum) generateFraction();
+        if(bottomGoalNum === 1) generateFraction();
+        if(topGoalNum === prevTopNum && bottomGoalNum === prevBottomNum) generateFraction();
+
+        const allBalls = [topGoalNum, bottomGoalNum];
+
+        topBalls = [];
+        topBalls.push(topGoalNum);
+
+        const topBall = getRandomInt(1, 10, allBalls);
+        topBalls.push(topBall);
+        allBalls.push(topBall);
+
+        bottomBalls = [];
+        bottomBalls.push(bottomGoalNum);
+
+        const bottomBall = getRandomInt(1, 10, allBalls);
+        bottomBalls.push(bottomBall);
+        allBalls.push(bottomBall);
+
+        if(new Set(allBalls).size !== allBalls.length) generateFraction();
+        if(topBall / topGoalNum === bottomBall / bottomGoalNum) generateFraction();
+
+        prevTopNum = topGoalNum;
+        prevBottomNum = bottomGoalNum;
+
+    }
 
     function createLines(container){
 
@@ -108,14 +158,14 @@ const Level1 = (() => {
         fractionContainer.id = "fraction-container";
 
         const topNumber = document.createElement("p");
-        topNumber.textContent = "1";
+        topNumber.textContent = `${topGoalNum * 2}`;
         topNumber.id = "top-number";
         
         const fractionBar = document.createElement("hr");
         fractionBar.id = "fraction-bar";
 
         const bottomNumber = document.createElement("p");
-        bottomNumber.textContent = "4";
+        bottomNumber.textContent = `${bottomGoalNum * 2}`;
         bottomNumber.id = "bottom-number";
 
         fractionContainer.appendChild(topNumber);
@@ -153,6 +203,8 @@ const Level1 = (() => {
     }
 
     function incrementCorrectCount({ correct }){
+
+        console.log("goal hit");
 
         if(correct){
             makeGoalPopup("Nice Shot!");
@@ -447,14 +499,39 @@ const Level1 = (() => {
 
     }
 
+    function deleteAllObjects(){
+
+        allObjects.forEach(function(obj){
+            obj.remove();
+        });
+
+        allObjects = [];
+
+        events.off("ballReleased", incrementStroke);
+        events.off("hitGoal", incrementCorrectCount);
+        events.off("gameOver", gameOver);
+
+    }
+
+    function gameOver({ status, star }){
+
+        if(status === "win"){
+            events.emit("levelWin", { "level": level, "star": star });
+            makeWinningPopup(star, outerContainer);
+        }else{
+            makeLosingPopup(outerContainer);
+        }
+
+    }
+
     function load(makePopup = true){
 
         window.removeEventListener("click", removeStartingPopup);
 
         strokes = 0;
         correctCount = 0;
-        events.off("ballReleased", incrementStroke);
-        events.off("hitGoal", incrementCorrectCount);
+
+        generateFraction();
 
         docHeight = document.documentElement.scrollHeight;
         docWidth = document.documentElement.scrollWidth;
@@ -485,30 +562,31 @@ const Level1 = (() => {
         const gameWidth = gameContainer.offsetWidth;
 
         //top balls
-        Ball(outerContainer, gameContainer, 2, true);
-        Ball(outerContainer, gameContainer, 3, true);
+        for(let i = 0; i < topBalls.length; i++){
+            Ball(outerContainer, gameContainer, topBalls[i], true);
+        }
 
         //bottom balls
-        Ball(outerContainer, gameContainer, 8, false);
-        Ball(outerContainer, gameContainer, 6, false);
+        for(let i = 0; i < bottomBalls.length; i++){
+            Ball(outerContainer, gameContainer, bottomBalls[i], false);
+        }
 
         //top goal
-        Goal(gameContainer, gameWidth - 50, gameHeight / 2 - 60, topGoalNum);
+        allObjects.push(Goal(gameContainer, gameWidth - 50, gameHeight / 2 - 60, topGoalNum));
 
         //bottom goal
-        Goal(gameContainer, gameWidth - 50, gameHeight / 2 + 60, bottomGoalNum);
+        allObjects.push(Goal(gameContainer, gameWidth - 50, gameHeight / 2 + 60, bottomGoalNum));
         
         //central wall
-        Wall(gameContainer, gameHeight / 2 - 5, 0, gameWidth, 10);
+        allObjects.push(Wall(gameContainer, gameHeight / 2 - 5, 0, gameWidth, 10, true));
 
         //walls on top
-        Wall(gameContainer, 0, gameWidth / 3, 50, gameHeight * 3 / 10);
-        Wall(gameContainer, gameHeight / 2 - gameHeight / 3, gameWidth * 2 / 3, 50, gameHeight / 3);
+        allObjects.push(Wall(gameContainer, 0, gameWidth / 3, 50, gameHeight * 3 / 10));
+        allObjects.push(Wall(gameContainer, gameHeight / 2 - gameHeight / 3, gameWidth * 2 / 3, 50, gameHeight / 3 - 5));
 
         //walls on bottom
-        // Wall(gameContainer, top, left, width, height)
-        Wall(gameContainer, gameHeight - gameHeight / 4, gameWidth * 2 / 5, 70, gameHeight / 4);
-        Wall(gameContainer, gameHeight / 2, gameWidth * 3 / 5, 40, gameHeight / 3);
+        allObjects.push(Wall(gameContainer, gameHeight - gameHeight / 4, gameWidth * 2 / 5, 70, gameHeight / 4));
+        allObjects.push(Wall(gameContainer, gameHeight / 2 + 5, gameWidth * 3 / 5, 40, gameHeight / 3));
         
         if(makePopup){
             makeStartingPopup(outerContainer);
@@ -516,22 +594,13 @@ const Level1 = (() => {
 
         events.on("ballReleased", incrementStroke);
 
-        events.on("gameOver", function({ status, star }){
-
-            if(status === "win"){
-                events.emit("levelWin", { "level": level, "star": star });
-                makeWinningPopup(star, outerContainer);
-            }else{
-                makeLosingPopup(outerContainer);
-            }
-
-        });
+        events.on("gameOver", gameOver);
 
         events.on("hitGoal", incrementCorrectCount);
 
     }
 
-    return { load };
+    return { load, deleteAllObjects };
 
 })();
 
