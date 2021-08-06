@@ -2,8 +2,8 @@ import events from '../events'
 
 const Goal = (parent, cx, cy, goalNumber = 0) => {
 
-    const width = 78;
-    const height = 78;
+    const width = 66;
+    const height = 66;
     const fromTop = cy - height / 2;
     const fromLeft = cx - width / 2;
     const number = goalNumber;
@@ -44,6 +44,7 @@ const Goal = (parent, cx, cy, goalNumber = 0) => {
         const correct = checkNumber(ballNumber);
 
         if(distance(cx, cy, thisCenterX, thisCenterY) < radiusDistance - 10){
+
             events.emit("hitGoal", {"centerX": thisCenterX, "centerY": thisCenterY, 
                                     id, intervalId, correct});
             if(correct){

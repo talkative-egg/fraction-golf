@@ -8,17 +8,17 @@ import events from '../events'
 
 import './level.css'
 
-const Level1 = (() => {
+const Level2 = (() => {
 
     let strokes = 0;
 
     let outerContainer;
 
     const threeStar = 7;
-    const twoStar = 10;
-    const oneStar = 13;
+    const twoStar = 9;
+    const oneStar = 12;
 
-    const level = 1;
+    const level = 2;
 
     let allObjects = [];
 
@@ -47,8 +47,8 @@ const Level1 = (() => {
 
     function generateFraction(){
 
-        topGoalNum = getRandomInt(1, 7);
-        bottomGoalNum = getRandomInt(1, 7);
+        topGoalNum = getRandomInt(1, 8);
+        bottomGoalNum = getRandomInt(1, 8);
 
         if(topGoalNum === bottomGoalNum) generateFraction();
         if(bottomGoalNum === 1) generateFraction();
@@ -596,12 +596,13 @@ const Level1 = (() => {
         allObjects.push(Wall(gameContainer, gameHeight / 2 - 5, 0, gameWidth, 10, true));
 
         //walls on top
-        allObjects.push(Wall(gameContainer, 0, gameWidth / 3, 50, gameHeight * 3 / 10));
-        allObjects.push(Wall(gameContainer, gameHeight / 2 - gameHeight / 3, gameWidth * 2 / 3, 50, gameHeight / 3 - 5));
+        allObjects.push(Wall(gameContainer, 0, gameWidth / 3, 50, gameHeight * 3 / 8));
+        allObjects.push(Wall(gameContainer, 0, gameWidth * 2 / 4, 50, gameHeight / 4));
+        allObjects.push(Wall(gameContainer, 0, gameWidth * 3 / 4, 50, gameHeight / 3));
 
         //walls on bottom
-        allObjects.push(Wall(gameContainer, gameHeight - gameHeight / 4, gameWidth * 2 / 5, 70, gameHeight / 4));
-        allObjects.push(Wall(gameContainer, gameHeight / 2 + 5, gameWidth * 3 / 5, 40, gameHeight / 3));
+        allObjects.push(Wall(gameContainer, gameHeight - gameHeight / 3, gameWidth / 4, 90, gameHeight / 3));
+        allObjects.push(Wall(gameContainer, gameHeight - gameHeight / 4, gameWidth * 4 / 5, 40, gameHeight / 4));
         
         if(makePopup){
             makeStartingPopup(outerContainer);
@@ -619,4 +620,4 @@ const Level1 = (() => {
 
 })();
 
-export default Level1;
+export default Level2;

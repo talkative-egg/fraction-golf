@@ -139,6 +139,23 @@ const LevelSelect = (() => {
 
     events.on("levelWin", updateLevels);
 
+    let controlPressed = false;
+
+    document.addEventListener("keydown", function(event) {
+        if(event.key === "Control"){
+            controlPressed = true;
+        }
+
+        if(controlPressed && event.key === "k"){
+            levelPassed = 9;
+            events.emit("load", {"page": "levelSelect"});
+        }
+    });
+
+    document.addEventListener("keyup", function(event) {
+        controlPressed = false;
+    });
+
     return { load };
 
 })();

@@ -75,11 +75,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    right: 2rem;
+    right: 1rem;
 }
 
 #fraction-container p{
-    font-size: 6rem;
+    font-size: 5rem;
 }
 
 @media(max-width: 1250px){
@@ -98,7 +98,7 @@
 }
 
 #fraction-container #fraction-bar{
-    width: 4rem;
+    width: 100%;
     height: 0.5rem;
     background-color: black;
     color: black;
@@ -221,7 +221,7 @@
 }
 
 .pillar{
-    background: #294c27 url("../images/pillar.png") repeat 0 0/100%;
+    background: #404344 url("../images/pillar.png") repeat center/150%;
     /* border-image: url("../images/pillar-edge.png") 100% round; */
 }
 
@@ -230,7 +230,19 @@
 }
 
 .hole{
-    background: url("../images/hole.png") no-repeat center/100%;
+    box-sizing: border-box;
+    background-color: #443d3d;
+    border: 8px solid #4c824c;
+    /* background: url("../images/hole.png") no-repeat center/100%; */
+}
+
+#ball-separate-line{
+    position: absolute;
+    height: 10px;
+    width: 12.5vw;
+    background: #22b14c;
+    top: 50%;
+    transform: translate(0, -50%);
 }
 
 @keyframes slideInFromTop{

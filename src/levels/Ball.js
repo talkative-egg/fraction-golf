@@ -4,8 +4,8 @@ import events from '../events';
 
 const Ball = (initialParent, parent, ballNumber = 0, top = false) => {
 
-    const width = 36;
-    const height = 36;
+    const width = 50;
+    const height = 50;
     const number = ballNumber;
 
     const ballId = uniqid();
@@ -207,7 +207,7 @@ const Ball = (initialParent, parent, ballNumber = 0, top = false) => {
 
     const moveToGoal = ({centerX, centerY, id, intervalId, correct}) => {
 
-        events.off("hitGoal", moveToGoal);
+        // events.off("hitGoal", moveToGoal);
 
         if(id !== ballId) return;
 
