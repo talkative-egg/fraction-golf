@@ -18,8 +18,6 @@ import golf_f from "../images/golf_f.png";
 import start from "../images/start.png";
 import button from "../images/button.png";
 
-import goal from "../images/goal.png";
-
 import levelSelectBackground from "../images/levelSelect/background-2.png";
 import levelSelectLevel1 from "../images/levelSelect/1.png";
 import levelSelectLevel2 from "../images/levelSelect/2.png";
@@ -61,10 +59,6 @@ export const balls = {
     "ball7": ball7,
     "ball8": ball8,
     "ball9": ball9,
-}
-
-export const goals = {
-    "goal": goal
 }
 
 export const levelSelectImgs = {

@@ -4,8 +4,8 @@ import events from '../events';
 
 const Ball = (initialParent, parent, ballNumber = 0, top = false) => {
 
-    const width = 40;
-    const height = 40;
+    const width = 36;
+    const height = 36;
     const number = ballNumber;
 
     const ballId = uniqid();
@@ -124,8 +124,8 @@ const Ball = (initialParent, parent, ballNumber = 0, top = false) => {
             fromTop += Math.sin(angle) * radius * 0.4;
         }
         
-        fromLeft += (centerX - thisCenterX) * 0.15;
-        fromTop += (centerY - thisCenterY) * 0.15;
+        fromLeft += (centerX - thisCenterX) * 0.18;
+        fromTop += (centerY - thisCenterY) * 0.18;
 
         update();
 
@@ -420,6 +420,8 @@ const Ball = (initialParent, parent, ballNumber = 0, top = false) => {
     initialParent.appendChild(ball);
 
     events.on("resetBall", moveBack);
+
+    return { remove };
 
 }
 

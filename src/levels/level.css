@@ -222,10 +222,15 @@
 
 .pillar{
     background: #294c27 url("../images/pillar.png") repeat 0 0/100%;
+    /* border-image: url("../images/pillar-edge.png") 100% round; */
 }
 
 .center-wall{
     background: #58a251;
+}
+
+.hole{
+    background: url("../images/hole.png") no-repeat center/100%;
 }
 
 @keyframes slideInFromTop{

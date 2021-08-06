@@ -563,12 +563,12 @@ const Level1 = (() => {
 
         //top balls
         for(let i = 0; i < topBalls.length; i++){
-            Ball(outerContainer, gameContainer, topBalls[i], true);
+            allObjects.push(Ball(outerContainer, gameContainer, topBalls[i], true));
         }
 
         //bottom balls
         for(let i = 0; i < bottomBalls.length; i++){
-            Ball(outerContainer, gameContainer, bottomBalls[i], false);
+            allObjects.push(Ball(outerContainer, gameContainer, bottomBalls[i], false));
         }
 
         //top goal
