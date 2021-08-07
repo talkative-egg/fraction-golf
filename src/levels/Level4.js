@@ -608,7 +608,7 @@ const Level4 = (() => {
         allObjects.push(Goal(gameContainer, gameWidth - 50, gameHeight / 2 + 60, bottomGoalNum));
         
         //central wall
-        allObjects.push(Wall(gameContainer, gameHeight / 2 - 5, 0, gameWidth, 10, true));
+        allObjects.push(Wall(gameContainer, gameHeight / 2 - 5, 0, gameWidth, 10, true, [1,1]));
 
         //walls on top
         allObjects.push(Wall(gameContainer, 0, gameWidth / 5, gameWidth / 4, gameHeight / 4));
