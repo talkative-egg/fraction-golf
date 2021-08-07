@@ -613,10 +613,10 @@ const Level1 = (() => {
         allObjects.push(Goal(gameContainer, gameWidth - 50, gameHeight / 2 + 60, bottomGoalNum));
         
         //central wall
-        allObjects.push(Wall(gameContainer, gameHeight / 2 - 5, 0, gameWidth, 10, true));
+        allObjects.push(Wall(gameContainer, gameHeight / 2 - 5, 0, gameWidth, 10, true [1,1]));
 
         //walls on top
-        allObjects.push(Wall(gameContainer, 0, gameWidth / 3, 50, gameHeight * 3 / 10));
+        allObjects.push(Wall(gameContainer, 0, gameWidth / 3, 50, gameHeight * 3 / 10, [3,1]));
         allObjects.push(Wall(gameContainer, gameHeight / 2 - gameHeight / 3, gameWidth * 2 / 3, 50, gameHeight / 3 - 5));
 
         //walls on bottom

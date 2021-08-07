@@ -2,7 +2,7 @@ import events from '../events'
 
 import { pillarBackground } from '../loading/loadImages';
 
-const Wall = (parent, objTop, objLeft, objWidth, objHeight, centerWall = false, type = [1,1]) => {
+const Wall = (parent, objTop, objLeft, objWidth, objHeight, type = [1,1], centerWall = false) => {
 
     const fromTop = objTop;
     const fromLeft = objLeft;
