@@ -37,6 +37,8 @@ import starFilled from "../images/star-filled.png";
 import levelHome from "../images/home.png";
 import levelRestart from "../images/restart.png";
 import levelRestartGrey from "../images/restart-grey.png";
+import muteIcon from "../images/mute.png";
+import githubIcon from "../images/github.png";
 
 import pillarBackground1_1 from "../images/walls/1-1.png";
 import pillarBackground1_2 from "../images/walls/1-2.png";
@@ -113,4 +115,6 @@ export const icons = {
     "home": levelHome,
     "restart": levelRestart,
     "restart-grey": levelRestartGrey,
+    "mute": muteIcon,
+    "github": githubIcon,
 }

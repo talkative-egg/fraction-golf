@@ -1,9 +1,11 @@
 import { titleImgs } from "../loading/loadImages";
 import events from '../events';
+import { PlayMusic } from "../loading/loadMusic";
 
 const TitlePage = (() => {
 
     const body = document.querySelector("body");
+    // PlayMusic.playBackgroundMusic();
 
     function makeBackgroundBlocks(){
 

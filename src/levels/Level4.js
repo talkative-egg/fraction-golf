@@ -220,10 +220,9 @@ const Level4 = (() => {
 
     function incrementCorrectCount({ correct }){
 
-        if(correct){
-            makeGoalPopup("Nice Shot!");
-        }else{
-            makeGoalPopup("Not Quite");
+        makeGoalPopup(correct);
+
+        if(!correct){
             return;
         }
 
@@ -249,14 +248,21 @@ const Level4 = (() => {
 
     }
 
-    function makeGoalPopup(textContent){
+    function makeGoalPopup(correct){
 
         const popupContainer = document.createElement("div");
-        popupContainer.id = "goal-popup";
+        popupContainer.className = "goal-popup";
 
         const text = document.createElement("p");
-        text.id = "goal-popup-text";
-        text.textContent = textContent;
+        text.className = "goal-popup-text";
+
+        if(correct){
+            text.textContent = "Nice Shot!"
+            popupContainer.id = "goal-popup-correct";
+        }else{
+            text.textContent = "Not Quite";
+            popupContainer.id = "goal-popup-incorrect";
+        }
 
         popupContainer.appendChild(text);
 

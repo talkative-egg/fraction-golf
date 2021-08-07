@@ -209,7 +209,7 @@
     height: 6rem;
 }
 
-#goal-popup{
+.goal-popup{
     background-color: #f5e2e2de;
     position: absolute;
     left: 50%;
@@ -220,9 +220,13 @@
     text-align: center;
 }
 
-#goal-popup-text{
+.goal-popup-text{
     font-size: 3rem;
     animation: slideInFromLeft 2s ease-in-out;
+}
+
+#goal-popup-incorrect{
+    background-color: #e08282de;
 }
 
 .pillar{

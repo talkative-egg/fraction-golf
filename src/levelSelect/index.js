@@ -3,6 +3,8 @@ import './styles.css';
 
 import events from '../events'
 
+import { PlayMusic } from '../loading/loadMusic'
+
 const LevelSelect = (() => {
 
     let levelPassed = 0;
@@ -82,11 +84,29 @@ const LevelSelect = (() => {
 
     }
 
+    function makeSettingsPopup(e){
+
+        const container = e.target.container;
+
+        const popupContainer = document.createElement("div");
+        popupContainer.id = "level-select-settings-container";
+
+
+
+    }
+
+    // function mutePage() {
+    //     document.querySelectorAll("video, audio").forEach( elem => muteMe(elem) );
+    // }
+
     function makeSettings(container){
 
         const settings = document.createElement("img");
         settings.setAttribute("src", levelSelectImgs.settings);
         settings.id = "settings-button";
+        
+        settings.container = container;
+        settings.addEventListener("click", makeSettingsPopup);
 
         container.appendChild(settings);
 
