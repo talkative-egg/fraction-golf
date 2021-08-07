@@ -6,6 +6,46 @@
 		<title>Fraction Golf</title>
 	</head>
 	<body>
+		<!-- TODO: Add SDKs for Firebase products that you want to use
+		https://firebase.google.com/docs/web/setup#available-libraries -->
+		<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
+
+		<script>
+			// Your web app's Firebase configuration
+			var firebaseConfig = {
+				apiKey: "AIzaSyAhJdt3KcdZwSORPhe43Y4iMKFE7kzhh68",
+				authDomain: "fraction-golf.firebaseapp.com",
+				databaseURL: "https://fraction-golf-default-rtdb.firebaseio.com",
+				projectId: "fraction-golf",
+				storageBucket: "fraction-golf.appspot.com",
+				messagingSenderId: "628280210723",
+				appId: "1:628280210723:web:5295f9883b7c2ff02fc896"
+			};
+			// Initialize Firebase
+			firebase.initializeApp(firebaseConfig);
+
+			var database = firebase.database();
+
+			function writeUserData(userId){
+				firebase.database().ref("users/" + userId).set({
+					score: 5,
+				})
+			}
+
+			function getUserData(userId){
+				const ref = firebase.database().ref();
+				ref.child("users").child(userId).get().then((snapshot) => {
+					if(snapshot.exists()){
+						return snapshot.val();
+					}else{
+						return null;
+					}
+				}).catch((error) => {
+					console.error(error);
+				})
+			}
+
+		</script>
 		<script src="bundle.js"></script>
 	</body>
 </html>

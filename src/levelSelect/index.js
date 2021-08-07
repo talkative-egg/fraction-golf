@@ -91,7 +91,60 @@ const LevelSelect = (() => {
         const popupContainer = document.createElement("div");
         popupContainer.id = "level-select-settings-container";
 
+        const title = document.createElement("h2");
+        title.id = "level-select-settings-title";
+        title.textContent = "Settings";
 
+        const iconContainer = document.createElement("div");
+        iconContainer.id = "level-select-icon-container";
+
+        const githubIcon = document.createElement("img");
+        githubIcon.setAttribute("src", icons.github);
+
+        githubIcon.addEventListener("click", function(){
+            window.location.href = "https://github.com/talkative-egg/fraction-golf";
+        })
+
+        const muteIcon = document.createElement("img");
+        muteIcon.setAttribute("src", icons.mute);
+
+        const homeIcon = document.createElement("img");
+        homeIcon.setAttribute("src", icons.home);
+
+        homeIcon.addEventListener("click", function(){
+            events.emit("load", {"page": "titlePage"});
+        })
+
+        iconContainer.appendChild(githubIcon);
+        iconContainer.appendChild(muteIcon);
+        iconContainer.appendChild(homeIcon);
+
+        popupContainer.appendChild(title);
+        popupContainer.appendChild(iconContainer);
+
+        container.appendChild(popupContainer);
+
+        setTimeout(function(){
+            window.addEventListener("click", removeSettingsPopup);
+        }, 20);
+
+    }
+
+    function removeSettingsPopup(){
+
+        window.removeEventListener("click", removeSettingsPopup);
+
+        const popup = document.querySelector("#level-select-settings-container")
+
+        if(popup == null){
+            return
+        }
+
+        popup.style.animation = "slideOutToBottom 0.5s ease-in-out forwards";
+
+        popup.addEventListener("animationend", function(){
+            popup.remove();
+        });
 
     }
 
