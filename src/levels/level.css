@@ -221,7 +221,8 @@
 }
 
 .pillar{
-    background: #404344 url("../images/pillar.png") repeat center/150%;
+    background-repeat: no-repeat;
+    /*background-size: 50px 200px;*/
     /* border-image: url("../images/pillar-edge.png") 100% round; */
 }
 
