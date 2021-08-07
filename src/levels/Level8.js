@@ -617,16 +617,16 @@ const Level8 = (() => {
         allObjects.push(Wall(gameContainer, gameHeight / 2 - 5, 0, gameWidth, 10, true, [1,1]));
 
         //walls on top
-        allObjects.push(Wall(gameContainer, gameHeight / 4, gameWidth / 8, gameWidth / 7, gameHeight / 4 - 5));
-        allObjects.push(Wall(gameContainer, 0, gameWidth * 2 / 5, gameWidth / 25, gameHeight / 3));
-        allObjects.push(Wall(gameContainer, gameHeight / 3 - gameHeight / 20, gameWidth / 2 - 20, gameWidth / 4, gameHeight / 20));
-        allObjects.push(Wall(gameContainer, 0, gameWidth * 3 / 4 - gameWidth / 20 - 20, gameWidth / 20, gameHeight / 7));
+        allObjects.push(Wall(gameContainer, gameHeight / 4, gameWidth / 8, gameWidth / 7, gameHeight / 4 - 5, [2,2]));
+        allObjects.push(Wall(gameContainer, 0, gameWidth * 2 / 5, gameWidth / 25, gameHeight / 3, [4,1]));
+        allObjects.push(Wall(gameContainer, gameHeight / 3 - gameHeight / 20, gameWidth / 2 - 20, gameWidth / 4, gameHeight / 20, [1,8]));
+        allObjects.push(Wall(gameContainer, 0, gameWidth * 3 / 4 - gameWidth / 20 - 20, gameWidth / 20, gameHeight / 7, [2,1]));
 
         //walls on bottom
-        allObjects.push(Wall(gameContainer, gameHeight / 2 + gameHeight / 8, gameWidth / 5, gameWidth / 12, gameHeight / 4));
-        allObjects.push(Wall(gameContainer, gameHeight - gameHeight / 8, gameWidth * 2 / 5, gameWidth / 25, gameHeight / 8));
-        allObjects.push(Wall(gameContainer, gameHeight / 2 + gameHeight / 20 + gameHeight / 8, gameWidth * 2 / 5, gameWidth / 4, gameHeight / 20));
-        allObjects.push(Wall(gameContainer, gameHeight / 2 + gameHeight / 20 + gameHeight / 8, gameWidth * 5 / 7, gameWidth / 20, gameHeight / 3 - 5));
+        allObjects.push(Wall(gameContainer, gameHeight / 2 + gameHeight / 8, gameWidth / 5, gameWidth / 12, gameHeight / 4, [3,2]));
+        allObjects.push(Wall(gameContainer, gameHeight - gameHeight / 8, gameWidth * 2 / 5, gameWidth / 25, gameHeight / 8, [2,1]));
+        allObjects.push(Wall(gameContainer, gameHeight / 2 + gameHeight / 20 + gameHeight / 8, gameWidth * 2 / 5, gameWidth / 4, gameHeight / 20, [1,8]));
+        allObjects.push(Wall(gameContainer, gameHeight / 2 + gameHeight / 20 + gameHeight / 8, gameWidth * 5 / 7, gameWidth / 20, gameHeight / 3 - 5, [4,1]));
         
         if(makePopup){
             makeStartingPopup(outerContainer);

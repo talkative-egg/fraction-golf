@@ -617,13 +617,13 @@ const Level9 = (() => {
         allObjects.push(Wall(gameContainer, gameHeight / 2 - 5, 0, gameWidth, 10, true, [1,1]));
 
         //walls on top
-        allObjects.push(Wall(gameContainer, gameHeight / 6, 0, gameWidth * 2 / 3, gameHeight / 30));
-        allObjects.push(Wall(gameContainer, gameHeight * 2 / 7, gameWidth / 4, gameWidth / 10, gameHeight / 15));
-        allObjects.push(Wall(gameContainer, gameHeight / 3, gameWidth / 2, gameWidth / 10, gameHeight / 15));
-        allObjects.push(Wall(gameContainer, gameHeight / 7, gameWidth * 5 / 6, gameWidth / 10, gameHeight / 6));
+        allObjects.push(Wall(gameContainer, gameHeight / 6, 0, gameWidth * 2 / 3, gameHeight / 30, [1,16]));
+        allObjects.push(Wall(gameContainer, gameHeight * 2 / 7, gameWidth / 4, gameWidth / 10, gameHeight / 15, [1,2]));
+        allObjects.push(Wall(gameContainer, gameHeight / 3, gameWidth / 2, gameWidth / 10, gameHeight / 15, [1,2]));
+        allObjects.push(Wall(gameContainer, gameHeight / 7, gameWidth * 5 / 6, gameWidth / 10, gameHeight / 6, [1,1]));
 
         //walls on bottom
-        allObjects.push(Wall(gameContainer, gameHeight - gameHeight / 6 - gameHeight / 30, 0, gameWidth * 2 / 3, gameHeight / 30));
+        allObjects.push(Wall(gameContainer, gameHeight - gameHeight / 6 - gameHeight / 30, 0, gameWidth * 2 / 3, gameHeight / 30, [1,16]));
         allObjects.push(Wall(gameContainer, gameHeight / 2 + gameHeight / 8, gameWidth / 8, gameWidth / 10, gameHeight / 7));
         allObjects.push(Wall(gameContainer, gameHeight / 2 + gameHeight / 8, gameWidth / 2, gameWidth / 10, gameHeight / 7));
         
