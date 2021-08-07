@@ -5,10 +5,14 @@ import events from '../events'
 
 import { PlayMusic } from '../loading/loadMusic'
 
+import Firebase from '../Firebase';
+
 const LevelSelect = (() => {
 
-    let levelPassed = 0;
-    let levelStars = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let userData = Firebase.getUserData();
+
+    let levelPassed = (userData)? userData.levelPassed : 0;
+    let levelStars = (userData)? userData.levelStars : [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
     function makeButtons(container){
 
@@ -107,6 +111,18 @@ const LevelSelect = (() => {
 
         const muteIcon = document.createElement("img");
         muteIcon.setAttribute("src", icons.mute);
+        muteIcon.id = "mute-button";
+
+        muteIcon.addEventListener("click", function(e){
+
+            if(muteIcon.getAttribute("src") === icons.mute){
+                muteIcon.setAttribute("src", icons.muted);
+                PlayMusic.stopBackgroundMusic();
+            }else{
+                muteIcon.setAttribute("src", icons.mute);
+                PlayMusic.playBackgroundMusic();
+            }
+        })
 
         const homeIcon = document.createElement("img");
         homeIcon.setAttribute("src", icons.home);
@@ -130,7 +146,9 @@ const LevelSelect = (() => {
 
     }
 
-    function removeSettingsPopup(){
+    function removeSettingsPopup(e){
+
+        if(e.target.id === "mute-button") return;
 
         window.removeEventListener("click", removeSettingsPopup);
 
@@ -147,10 +165,6 @@ const LevelSelect = (() => {
         });
 
     }
-
-    // function mutePage() {
-    //     document.querySelectorAll("video, audio").forEach( elem => muteMe(elem) );
-    // }
 
     function makeSettings(container){
 
@@ -178,36 +192,45 @@ const LevelSelect = (() => {
     function updateLevels({ level, star }){
 
         if(levelStars[level - 1] === 0){
-            levelPassed++
+            levelPassed++;
         }
 
         if(star > levelStars[level - 1]){
             levelStars[level - 1] = star;
         }
 
+        Firebase.writeUserData(levelPassed, levelStars);
+
     }
 
     function load(){
 
-        const body = document.querySelector("body");
+        Firebase.getUserData().then(function(val){
 
-        const container = document.createElement("div");
-        container.id = "level-select"
-        container.style.background = `url(${levelSelectImgs.background}) no-repeat center center fixed`;
-        container.style.backgroundSize = "100% 100%";
+            levelPassed = val.levelPassed;
+            levelStars = val.levelStars;
 
-        container.style.zIndex = "-1";
+            const body = document.querySelector("body");
 
-        setTimeout(function(){
-            container.style.zIndex = "0";
-        }, 1000);
+            const container = document.createElement("div");
+            container.id = "level-select"
+            container.style.background = `url(${levelSelectImgs.background}) no-repeat center center fixed`;
+            container.style.backgroundSize = "100% 100%";
 
-        makeTitle(container);
-        makeSettings(container);
-        makeButtons(container);
+            container.style.zIndex = "-1";
 
-        body.prepend(container);
-        
+            setTimeout(function(){
+                container.style.zIndex = "0";
+            }, 1000);
+
+            makeTitle(container);
+            makeSettings(container);
+            makeButtons(container);
+
+            body.prepend(container);
+
+        })
+
     }
 
     events.on("levelWin", updateLevels);

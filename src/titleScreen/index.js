@@ -1,6 +1,9 @@
 import { titleImgs } from "../loading/loadImages";
 import events from '../events';
-import { PlayMusic } from "../loading/loadMusic";
+
+import Firebase from '../Firebase';
+
+import { PlayMusic } from '../loading/loadMusic';
 
 const TitlePage = (() => {
 
@@ -87,6 +90,178 @@ const TitlePage = (() => {
         
     }
 
+    function newGame(e){
+
+        const container = e.target.container;
+
+        container.querySelectorAll("*").forEach(function(element){
+            element.remove();
+        })
+
+        const text = document.createElement("label");
+        text.className = "sign-in-user-label";
+        text.id = "new-game-text";
+        text.textContent = "User Name: ";
+
+        const input = document.createElement("input");
+        input.className = "sign-in-user-name";
+        input.id = "new-game-input";
+        input.type = "text"
+        input.placeholder = "User Name";
+
+        const helpText = document.createElement("p");
+        helpText.className = "sign-in-help-text";
+        helpText.textContent = "";
+
+        const button = document.createElement("p");
+        button.className = "enter-game-button";
+        button.id = "new-game-button";
+        button.textContent = "Start Game!";
+
+        button.addEventListener("click", function(){
+
+            const value = input.value;
+
+            if(value === ""){
+                helpText.textContent = "Field cannot be empty";
+                return;
+            }else{
+                Firebase.checkIfUserExists(value).then(function(val){
+
+                    if(val){
+                        helpText.textContent = "Name already exists. Please select a new name.";
+                        return;
+                    }else{
+                        Firebase.setUserId(value);
+                        Firebase.writeUserData(0, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
+
+                        container.remove();
+
+                        events.emit("load", { "page": "levelSelect" });
+                    }
+                })
+                
+            }
+
+        });
+
+        container.appendChild(text);
+        container.appendChild(input);
+        container.appendChild(helpText);
+        container.appendChild(button);
+
+    }
+
+    function resumeGame(e){
+
+        const container = e.target.container;
+
+        container.querySelectorAll("*").forEach(function(element){
+            element.remove();
+        })
+
+        const text = document.createElement("label");
+        text.className = "sign-in-user-label";
+        text.textContent = "User Name: ";
+
+        const input = document.createElement("input");
+        input.className = "sign-in-user-name";
+        input.type = "text"
+        input.placeholder = "User Name";
+
+        const helpText = document.createElement("p");
+        helpText.className = "sign-in-help-text";
+        helpText.textContent = "";
+
+        const button = document.createElement("p");
+        button.className = "enter-game-button";
+        button.textContent = "Resume Game!";
+
+        button.addEventListener("click", function(){
+
+            const value = input.value;
+
+            if(value === ""){
+                helpText.textContent = "Field cannot be empty";
+                return;
+            }else{
+                Firebase.checkIfUserExists(value).then(function(val){
+
+                    if(val){
+
+                        Firebase.setUserId(value);
+
+                        container.remove();
+
+                        events.emit("load", { "page": "levelSelect" });
+
+                    }else{
+                        
+                        helpText.textContent = "User doesn't exist";
+                        return;
+
+                    }
+                })
+                
+            }
+
+        });
+
+        container.appendChild(text);
+        container.appendChild(input);
+        container.appendChild(helpText);
+        container.appendChild(button);
+
+    }
+
+    function makeSigninPopup(container){
+
+        const popupContainer = document.createElement("div");
+        popupContainer.id = "sign-in-container";
+
+        const newGameButton = document.createElement("p");
+        newGameButton.textContent = "New Game";
+        newGameButton.className = "sign-in-button";
+        newGameButton.container = popupContainer;
+
+        newGameButton.addEventListener("click", newGame)
+
+        const resumeGameButton = document.createElement("p");
+        resumeGameButton.textContent = "Resume Game";
+        resumeGameButton.className = "sign-in-button";
+        resumeGameButton.container = popupContainer;
+
+        resumeGameButton.addEventListener("click", resumeGame);
+
+        popupContainer.appendChild(newGameButton);
+        popupContainer.appendChild(resumeGameButton);
+
+        container.appendChild(popupContainer);
+
+        setTimeout(function(){
+            window.addEventListener("click", closeSigninPopup);
+        }, 20);
+        
+    }
+
+    function closeSigninPopup(e){
+
+        if(e.target.parentElement.id === "sign-in-container" || e.target.id === "sign-in-container") return;
+
+        window.removeEventListener("click", closeSigninPopup);
+
+        const popup = document.querySelector("#sign-in-container");
+
+        if(popup !== null){
+            popup.style.animation = "slideOutToBottom 0.5s ease-in-out forwards";
+
+            popup.addEventListener("animationend", function(){
+                popup.remove();
+            });
+        }
+
+    }
+
     function load(){
 
         const backgroundContainer = makeDiv([], "background");
@@ -125,7 +300,10 @@ const TitlePage = (() => {
             const buttonText = buttonContainer.querySelector("#text");
 
             buttonContainer.addEventListener("click", function(){
-                events.emit("load", {"page": "levelSelect"});
+                if(!PlayMusic.musicPlaying()){
+                    PlayMusic.playBackgroundMusic();
+                }
+                makeSigninPopup(backgroundContainer);
             });
 
             backgroundContainer.appendChild(buttonContainer);

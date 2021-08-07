@@ -38,6 +38,7 @@ import levelHome from "../images/home.png";
 import levelRestart from "../images/restart.png";
 import levelRestartGrey from "../images/restart-grey.png";
 import muteIcon from "../images/mute.png";
+import mutedIcon from "../images/muted.png";
 import githubIcon from "../images/github.png";
 
 import pillarBackground1_1 from "../images/walls/1-1.png";
@@ -116,5 +117,6 @@ export const icons = {
     "restart": levelRestart,
     "restart-grey": levelRestartGrey,
     "mute": muteIcon,
+    "muted": mutedIcon,
     "github": githubIcon,
 }

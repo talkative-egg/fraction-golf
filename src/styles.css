@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap');
+
 *{
     margin: 0;
     padding: 0;
@@ -8,6 +10,7 @@
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently
                         supported by Chrome, Edge, Opera and Firefox */
+    font-family: 'Josefin Sans', sans-serif;
 }
 
 html{
@@ -308,4 +311,65 @@ line{
 #dashed-line{
     stroke-dasharray: 4;
     z-index: 2;
+}
+
+#sign-in-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    gap: 2rem;
+    background-color: #aaccae;
+    border-radius: 2rem;
+    padding: 5rem 3rem;
+    animation: slideInFromTop 0.5s ease-in-out;
+}
+
+#sign-in-container .sign-in-button{
+    display: inline-block;
+    margin-bottom: 2rem;
+    font-size: 3rem;
+    border: 1px solid #c59d9d;
+    padding: 1rem 1.5rem;
+    border-radius: 1.5rem;
+    background-color: #83a8ce;
+}
+
+#sign-in-container .sign-in-button:hover{
+    background-color: #769fab;
+    cursor: pointer;
+}
+
+#sign-in-container .sign-in-user-label{
+    font-size: 2rem;
+}
+
+#sign-in-container .sign-in-user-name{
+    font-size: 1.7rem;
+    border-radius: 20px;
+    padding: 0.5rem 0.7rem;
+}
+
+input:focus, textarea:focus, select:focus{
+    outline: none;
+}
+
+#sign-in-container .sign-in-help-text{
+    margin-top: 2rem;
+    color: red;
+}
+
+#sign-in-container .enter-game-button{
+    width: fit-content;
+    font-size: 1.8rem;
+    margin: 3rem auto 0 auto;
+    padding: 0.8rem 1rem;
+    border-radius: 20px;
+    background-color: #83a8ce;
+}
+
+#sign-in-container .enter-game-button:hover{
+    background-color: #769fab;
+    cursor: pointer;
 }

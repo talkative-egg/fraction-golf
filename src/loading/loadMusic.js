@@ -2,30 +2,36 @@ import backgroundMusic from "../sounds/notesFinal.mp3";
 
 export const PlayMusic = (() => {
 
-    // const music = new Audio(backgroundMusic);
+    const background = new Audio(backgroundMusic); 
 
-    // let promise = music.play();
+    playBackgroundMusic();
 
-    // if (promise !== undefined) {
-    //     promise.then(_ => {
-    //         playBackgroundMusic();
-    //     }).catch(error => {
-    //         console.log("Nope");
-    //     });
-    // }
+    function stopBackgroundMusic(){
+        background.pause();
+        background.currentTime = 0;
+    }
 
-    // const playBackgroundMusic = () => {
+    function playBackgroundMusic(){
+        
+        if (typeof background.loop == 'boolean'){
+            background.loop = true;
+        }else{
+            background.addEventListener('ended', function() {
+                this.currentTime = 0;
+                this.play();
+            }, false);
+        }
+    
+        background.play();
 
-    //     if (promise !== undefined) {
-    //         promise.then(_ => {
-    //             playBackgroundMusic();
-    //         }).catch(error => {
-    //             console.log("Nope");
-    //         });
-    //     }
+    }
 
-    // }
+    function musicPlaying(){
 
-    // return { playBackgroundMusic };
+        return background.loop;
+
+    }
+
+    return { stopBackgroundMusic, playBackgroundMusic, musicPlaying };
 
 })();
