@@ -2,11 +2,21 @@ import events from '../events'
 
 const Goal = (parent, cx, cy, goalNumber = 0) => {
 
-    const width = 66;
-    const height = 66;
+    let width = 60;
+    let height = 60;
     const fromTop = cy - height / 2;
     const fromLeft = cx - width / 2;
     const number = goalNumber;
+
+    let docWidth = document.documentElement.scrollWidth;
+
+    if(docWidth > 1440){
+        width = 66;
+        height = 66;
+    }else if(docWidth > 1920){
+        width = 72;
+        height = 72;
+    }
 
     const goal = document.createElement("div");
 

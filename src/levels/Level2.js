@@ -115,6 +115,20 @@ const Level2 = (() => {
 
     }
 
+    function makeRestart(container){
+
+        const restart = document.createElement("img");
+        restart.setAttribute("src", icons["restart-grey"]);
+        restart.id = "level-restart-button";
+
+        restart.addEventListener("click", function(){
+            events.emit("load", { "page": `level${level}`, "makePopup": false });
+        });
+
+        container.appendChild(restart);
+
+    }
+
     function makeSettings(container){
 
         const settings = document.createElement("img");
@@ -407,7 +421,7 @@ const Level2 = (() => {
         threeStarOuterContainer.appendChild(threeStarInnerContainer);
 
         const threeStarText = document.createElement("p");
-        threeStarText.textContent = `<= ${threeStar} strokes`;
+        threeStarText.textContent = `≤ ${threeStar} strokes`;
         
         threeStarOuterContainer.appendChild(threeStarText);
 
@@ -424,7 +438,7 @@ const Level2 = (() => {
         twoStarOuterContainer.appendChild(twoStarInnerContainer);
 
         const twoStarText = document.createElement("p");
-        twoStarText.textContent = `<= ${twoStar} strokes`;
+        twoStarText.textContent = `≤ ${twoStar} strokes`;
 
         twoStarOuterContainer.appendChild(twoStarText);
 
@@ -440,7 +454,7 @@ const Level2 = (() => {
         oneStarOuterContainer.appendChild(oneStarInnerContainer);
 
         const oneStarText = document.createElement("p");
-        oneStarText.textContent = `<= ${oneStar} strokes`;
+        oneStarText.textContent = `≤ ${oneStar} strokes`;
 
         oneStarOuterContainer.appendChild(oneStarText);
 
@@ -559,6 +573,7 @@ const Level2 = (() => {
 
         
         makeScore(outerContainer);
+        makeRestart(outerContainer);
         makeSettings(outerContainer);
         makeStars(outerContainer);
         makeFraction(outerContainer);

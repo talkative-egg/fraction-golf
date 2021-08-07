@@ -8,7 +8,7 @@ import events from '../events'
 
 import './level.css'
 
-const Level2 = (() => {
+const Level9 = (() => {
 
     let strokes = 0;
 
@@ -18,7 +18,7 @@ const Level2 = (() => {
     const twoStar = 9;
     const oneStar = 12;
 
-    const level = 2;
+    const level = 9;
 
     let allObjects = [];
 
@@ -115,6 +115,20 @@ const Level2 = (() => {
 
     }
 
+    function makeRestart(container){
+
+        const restart = document.createElement("img");
+        restart.setAttribute("src", icons["restart-grey"]);
+        restart.id = "level-restart-button";
+
+        restart.addEventListener("click", function(){
+            events.emit("load", { "page": `level${level}`, "makePopup": false });
+        });
+
+        container.appendChild(restart);
+
+    }
+
     function makeSettings(container){
 
         const settings = document.createElement("img");
@@ -154,7 +168,7 @@ const Level2 = (() => {
 
     function makeFraction(container){
 
-        const factor = getRandomInt(2, 6);
+        const factor = getRandomInt(4, 10);
 
         const fractionContainer = document.createElement("div");
         fractionContainer.id = "fraction-container";
@@ -297,7 +311,7 @@ const Level2 = (() => {
 
         button.addEventListener("click", function(e){
             e.preventDefault();
-            events.emit("load", { "page": `level${level + 1}` });
+            events.emit("load", { "page": "levelSelect" });
         })
 
         const restart = document.createElement("img");
@@ -407,7 +421,7 @@ const Level2 = (() => {
         threeStarOuterContainer.appendChild(threeStarInnerContainer);
 
         const threeStarText = document.createElement("p");
-        threeStarText.textContent = `<= ${threeStar} strokes`;
+        threeStarText.textContent = `≤ ${threeStar} strokes`;
         
         threeStarOuterContainer.appendChild(threeStarText);
 
@@ -424,7 +438,7 @@ const Level2 = (() => {
         twoStarOuterContainer.appendChild(twoStarInnerContainer);
 
         const twoStarText = document.createElement("p");
-        twoStarText.textContent = `<= ${twoStar} strokes`;
+        twoStarText.textContent = `≤ ${twoStar} strokes`;
 
         twoStarOuterContainer.appendChild(twoStarText);
 
@@ -440,7 +454,7 @@ const Level2 = (() => {
         oneStarOuterContainer.appendChild(oneStarInnerContainer);
 
         const oneStarText = document.createElement("p");
-        oneStarText.textContent = `<= ${oneStar} strokes`;
+        oneStarText.textContent = `≤ ${oneStar} strokes`;
 
         oneStarOuterContainer.appendChild(oneStarText);
 
@@ -559,6 +573,7 @@ const Level2 = (() => {
 
         
         makeScore(outerContainer);
+        makeRestart(outerContainer);
         makeSettings(outerContainer);
         makeStars(outerContainer);
         makeFraction(outerContainer);
@@ -587,22 +602,24 @@ const Level2 = (() => {
         }
 
         //top goal
-        allObjects.push(Goal(gameContainer, gameWidth - 50, gameHeight / 2 - 60, topGoalNum));
+        allObjects.push(Goal(gameContainer, 40, 40, topGoalNum));
 
         //bottom goal
-        allObjects.push(Goal(gameContainer, gameWidth - 50, gameHeight / 2 + 60, bottomGoalNum));
+        allObjects.push(Goal(gameContainer, 40, gameHeight - 40, bottomGoalNum));
         
         //central wall
         allObjects.push(Wall(gameContainer, gameHeight / 2 - 5, 0, gameWidth, 10, true));
 
         //walls on top
-        allObjects.push(Wall(gameContainer, 0, gameWidth / 3, 50, gameHeight * 3 / 8));
-        allObjects.push(Wall(gameContainer, 0, gameWidth * 2 / 4, 50, gameHeight / 4));
-        allObjects.push(Wall(gameContainer, 0, gameWidth * 3 / 4, 50, gameHeight / 3));
+        allObjects.push(Wall(gameContainer, gameHeight / 6, 0, gameWidth * 2 / 3, gameHeight / 30));
+        allObjects.push(Wall(gameContainer, gameHeight * 2 / 7, gameWidth / 4, gameWidth / 10, gameHeight / 15));
+        allObjects.push(Wall(gameContainer, gameHeight / 3, gameWidth / 2, gameWidth / 10, gameHeight / 15));
+        allObjects.push(Wall(gameContainer, gameHeight / 7, gameWidth * 5 / 6, gameWidth / 10, gameHeight / 6));
 
         //walls on bottom
-        allObjects.push(Wall(gameContainer, gameHeight - gameHeight / 3, gameWidth / 4, 90, gameHeight / 3));
-        allObjects.push(Wall(gameContainer, gameHeight - gameHeight / 4, gameWidth * 4 / 5, 40, gameHeight / 4));
+        allObjects.push(Wall(gameContainer, gameHeight - gameHeight / 6 - gameHeight / 30, 0, gameWidth * 2 / 3, gameHeight / 30));
+        allObjects.push(Wall(gameContainer, gameHeight / 2 + gameHeight / 8, gameWidth / 8, gameWidth / 10, gameHeight / 7));
+        allObjects.push(Wall(gameContainer, gameHeight / 2 + gameHeight / 8, gameWidth / 2, gameWidth / 10, gameHeight / 7));
         
         if(makePopup){
             makeStartingPopup(outerContainer);
@@ -620,4 +637,4 @@ const Level2 = (() => {
 
 })();
 
-export default Level2;
+export default Level9;

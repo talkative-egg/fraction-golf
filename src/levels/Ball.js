@@ -4,14 +4,22 @@ import events from '../events';
 
 const Ball = (initialParent, parent, ballNumber = 0, top = false) => {
 
-    const width = 50;
-    const height = 50;
+    let width = 44;
+    let height = 44;
     const number = ballNumber;
 
     const ballId = uniqid();
 
     let docHeight = document.documentElement.scrollHeight;
     let docWidth = document.documentElement.scrollWidth;
+
+    if(docWidth > 1440){
+        width = 50;
+        height = 50;
+    }else if(docWidth > 1920){
+        width = 56;
+        height = 56;
+    }
 
     let fromTop;
     let fromLeft;

@@ -146,7 +146,7 @@ const LevelSelect = (() => {
             controlPressed = true;
         }
 
-        if(controlPressed && event.key === "k"){
+        if(controlPressed && event.key === "i"){
             levelPassed = 9;
             events.emit("load", {"page": "levelSelect"});
         }

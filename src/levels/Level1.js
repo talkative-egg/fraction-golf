@@ -115,6 +115,20 @@ const Level1 = (() => {
 
     }
 
+    function makeRestart(container){
+
+        const restart = document.createElement("img");
+        restart.setAttribute("src", icons["restart-grey"]);
+        restart.id = "level-restart-button";
+
+        restart.addEventListener("click", function(){
+            events.emit("load", { "page": `level${level}`, "makePopup": false });
+        });
+
+        container.appendChild(restart);
+
+    }
+
     function makeSettings(container){
 
         const settings = document.createElement("img");
@@ -407,7 +421,7 @@ const Level1 = (() => {
         threeStarOuterContainer.appendChild(threeStarInnerContainer);
 
         const threeStarText = document.createElement("p");
-        threeStarText.textContent = `<= ${threeStar} strokes`;
+        threeStarText.textContent = `≤ ${threeStar} strokes`;
         
         threeStarOuterContainer.appendChild(threeStarText);
 
@@ -424,7 +438,7 @@ const Level1 = (() => {
         twoStarOuterContainer.appendChild(twoStarInnerContainer);
 
         const twoStarText = document.createElement("p");
-        twoStarText.textContent = `<= ${twoStar} strokes`;
+        twoStarText.textContent = `≤ ${twoStar} strokes`;
 
         twoStarOuterContainer.appendChild(twoStarText);
 
@@ -440,9 +454,13 @@ const Level1 = (() => {
         oneStarOuterContainer.appendChild(oneStarInnerContainer);
 
         const oneStarText = document.createElement("p");
-        oneStarText.textContent = `<= ${oneStar} strokes`;
+        oneStarText.textContent = `≤ ${oneStar} strokes`;
 
         oneStarOuterContainer.appendChild(oneStarText);
+
+        const helpText = document.createElement("p");
+        helpText.textContent = "Click on the ball with the right number to start";
+        helpText.id = "level-1-help-text"
 
         const buttonContainer = document.createElement("button-container");
         buttonContainer.className = "level-button-container";
@@ -475,6 +493,7 @@ const Level1 = (() => {
         popupContainer.appendChild(threeStarOuterContainer);
         popupContainer.appendChild(twoStarOuterContainer);
         popupContainer.appendChild(oneStarOuterContainer);
+        popupContainer.appendChild(helpText);
         popupContainer.appendChild(buttonContainer);
 
         container.appendChild(popupContainer);
@@ -559,6 +578,7 @@ const Level1 = (() => {
 
         
         makeScore(outerContainer);
+        makeRestart(outerContainer);
         makeSettings(outerContainer);
         makeStars(outerContainer);
         makeFraction(outerContainer);

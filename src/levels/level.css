@@ -34,28 +34,28 @@
     max-height: 9vh;
 }
 
+#level-restart-button{
+    width: 3.5rem;
+    height: 3.5rem;
+    top: 1.1rem;
+    right: 6.1rem;
+    position: absolute;
+}
+
+#level-restart-button:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
 #settings{
-    width: 5rem;
-    height: 5rem;
+    width: 3.5rem;
+    height: 3.5rem;
     top: 1.1rem;
     right: 1.6rem;
     position: absolute;
 }
 
 #settings:hover{
-    transform: scale(1.1);
-    cursor: pointer;
-}
-
-#level-restart-button{
-    width: 5rem;
-    height: 5rem;
-    top: 6.3rem;
-    right: 1.6rem;
-    position: absolute;
-}
-
-#level-restart-button:hover{
     transform: scale(1.1);
     cursor: pointer;
 }
@@ -151,6 +151,11 @@
     font-size: 2rem;
 }
 
+.level-popup #level-1-help-text{
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+}
+
 .level-button-container{
     margin-top: 1.8rem;
     display: flex;
@@ -221,8 +226,7 @@
 }
 
 .pillar{
-    background: #404344 url("../images/pillar.png") repeat center/150%;
-    /* border-image: url("../images/pillar-edge.png") 100% round; */
+    background: #404344 url("../images/pillar.png") repeat center/10rem;
 }
 
 .center-wall{
@@ -233,7 +237,6 @@
     box-sizing: border-box;
     background-color: #443d3d;
     border: 8px solid #4c824c;
-    /* background: url("../images/hole.png") no-repeat center/100%; */
 }
 
 #ball-separate-line{
