@@ -611,13 +611,13 @@ const Level3 = (() => {
         allObjects.push(Wall(gameContainer, gameHeight / 2 - 5, 0, gameWidth, 10, true, [1,1]));
 
         //walls on top
-        allObjects.push(Wall(gameContainer, gameHeight / 2 - gameHeight / 3 - 5, gameWidth / 3, 250, gameHeight / 3));
-        allObjects.push(Wall(gameContainer, 0, gameWidth * 2 / 3, 70, gameHeight / 4));
+        allObjects.push(Wall(gameContainer, gameHeight / 2 - gameHeight / 3 - 5, gameWidth / 3, 250, gameHeight / 3, [2,2]));
+        allObjects.push(Wall(gameContainer, 0, gameWidth * 2 / 3, 70, gameHeight / 4, [3,1]));
 
         //walls on bottom
-        allObjects.push(Wall(gameContainer, gameHeight / 2 + 5, gameWidth / 4, 70, gameHeight / 4));
-        allObjects.push(Wall(gameContainer, gameHeight - gameHeight / 8, gameWidth / 4, 70, gameHeight / 8));
-        allObjects.push(Wall(gameContainer, gameHeight / 2 + 5, gameWidth / 2, 100, gameHeight / 3));
+        allObjects.push(Wall(gameContainer, gameHeight / 2 + 5, gameWidth / 4, 70, gameHeight / 4, [2,1]));
+        allObjects.push(Wall(gameContainer, gameHeight - gameHeight / 8, gameWidth / 4, 70, gameHeight / 8, [1,1]));
+        allObjects.push(Wall(gameContainer, gameHeight / 2 + 5, gameWidth / 2, 100, gameHeight / 3, [3,2]));
         
         if(makePopup){
             makeStartingPopup(outerContainer);

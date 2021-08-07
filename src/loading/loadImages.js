@@ -44,12 +44,12 @@ import pillarBackground1_3 from "../images/walls/1-3.png";
 import pillarBackground1_4 from "../images/walls/1-4.png";
 import pillarBackground2_2 from "../images/walls/2-2.png";
 import pillarBackground2_3 from "../images/walls/2-3.png";
-import pillarBackground2_4 from "../images/walls/2-4.png";
 import pillarBackground2_1 from "../images/walls/2-1.png";
 import pillarBackground3_1 from "../images/walls/3-1.png";
 import pillarBackground4_1 from "../images/walls/4-1.png";
 import pillarBackground3_2 from "../images/walls/3-2.png";
-import pillarBackground4_2 from "../images/walls/4-2.png";
+import pillarBackground1_8 from "../images/walls/1-8.png";
+import pillarBackground1_16 from "../images/walls/1-16.png";
 
 export const pillarBackground = {
     "1-1": pillarBackground1_1,
@@ -58,12 +58,12 @@ export const pillarBackground = {
     "1-4": pillarBackground1_4,
     "2-2": pillarBackground2_2,
     "2-3": pillarBackground2_3,
-    "2-4": pillarBackground2_4,
     "2-1": pillarBackground2_1,
     "3-1": pillarBackground3_1,
     "4-1": pillarBackground4_1,
     "3-2": pillarBackground3_2,
-    "4-2": pillarBackground4_2,
+    "1-8": pillarBackground1_8,
+    "1-16": pillarBackground1_16,
 }
 
 export const titleImgs = {

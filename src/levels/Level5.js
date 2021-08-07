@@ -611,13 +611,13 @@ const Level5 = (() => {
         allObjects.push(Wall(gameContainer, gameHeight / 2 - 5, 0, gameWidth, 10, true, [1,1]));
 
         //walls on top
-        allObjects.push(Wall(gameContainer, 0, gameWidth / 4, gameWidth / 3, gameHeight / 3));
-        allObjects.push(Wall(gameContainer, gameHeight / 2 - gameHeight / 8 - 5, gameWidth * 2 / 3, gameWidth / 8, gameHeight / 8));
+        allObjects.push(Wall(gameContainer, 0, gameWidth / 4, gameWidth / 3, gameHeight / 3, [2,3]));
+        allObjects.push(Wall(gameContainer, gameHeight / 2 - gameHeight / 8 - 5, gameWidth * 2 / 3, gameWidth / 8, gameHeight / 8, [1,2]));
 
         //walls on bottom
-        allObjects.push(Wall(gameContainer, gameHeight - gameHeight / 3, gameWidth / 6, gameWidth / 8, gameHeight / 3));
-        allObjects.push(Wall(gameContainer, gameHeight / 2 + 5, gameWidth * 2 / 5, gameWidth / 8, gameHeight / 3));
-        allObjects.push(Wall(gameContainer, gameHeight - gameHeight / 3, gameWidth * 3 / 5, gameWidth / 6, gameHeight / 3));
+        allObjects.push(Wall(gameContainer, gameHeight - gameHeight / 3, gameWidth / 6, gameWidth / 8, gameHeight / 3, [3,2]));
+        allObjects.push(Wall(gameContainer, gameHeight / 2 + 5, gameWidth * 2 / 5, gameWidth / 8, gameHeight / 3, [3,2]));
+        allObjects.push(Wall(gameContainer, gameHeight - gameHeight / 3, gameWidth * 3 / 5, gameWidth / 6, gameHeight / 3, [2,2]));
         
         if(makePopup){
             makeStartingPopup(outerContainer);
