@@ -617,11 +617,11 @@ const Level1 = (() => {
 
         //walls on top
         allObjects.push(Wall(gameContainer, 0, gameWidth / 3, 50, gameHeight * 3 / 10, [3,1]));
-        allObjects.push(Wall(gameContainer, gameHeight / 2 - gameHeight / 3, gameWidth * 2 / 3, 50, gameHeight / 3 - 5));
+        allObjects.push(Wall(gameContainer, gameHeight / 2 - gameHeight / 3, gameWidth * 2 / 3, 50, gameHeight / 3 - 5, [3,1]));
 
         //walls on bottom
-        allObjects.push(Wall(gameContainer, gameHeight - gameHeight / 4, gameWidth * 2 / 5, 70, gameHeight / 4));
-        allObjects.push(Wall(gameContainer, gameHeight / 2 + 5, gameWidth * 3 / 5, 40, gameHeight / 3));
+        allObjects.push(Wall(gameContainer, gameHeight - gameHeight / 4, gameWidth * 2 / 5, 70, gameHeight / 4, [2,1]));
+        allObjects.push(Wall(gameContainer, gameHeight / 2 + 5, gameWidth * 3 / 5, 40, gameHeight / 3, [3,1]));
         
         if(makePopup){
             makeStartingPopup(outerContainer);
