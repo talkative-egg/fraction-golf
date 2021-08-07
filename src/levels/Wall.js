@@ -1,6 +1,8 @@
 import events from '../events'
 
-const Wall = (parent, objTop, objLeft, objWidth, objHeight, centerWall = false) => {
+import { pillarBackground } from '../loading/loadImages';
+
+const Wall = (parent, objTop, objLeft, objWidth, objHeight, centerWall = false, type = [1,1]) => {
 
     const fromTop = objTop;
     const fromLeft = objLeft;
@@ -13,6 +15,18 @@ const Wall = (parent, objTop, objLeft, objWidth, objHeight, centerWall = false) 
         wall.className = "center-wall";
     }else{
         wall.className = "pillar"
+
+        //Max Code
+
+        wall.style.backgroundSize = `${width}px ${height}px`;
+
+        const url = pillarBackground[`${type[0]}-${type[1]}`];
+        wall.style.background = `url(${url}) center/150%`;
+
+        wall.style.backgroundSize= `${width}px ${height}px`;
+
+
+
     }
     
     wall.style.position = "absolute";
