@@ -2,6 +2,8 @@ import { balls } from '../loading/loadImages';
 import uniqid from 'uniqid';
 import events from '../events';
 
+import { PlayMusic } from '../loading/loadMusic';
+
 const Ball = (initialParent, parent, ballNumber = 0, top = false) => {
 
     let width = 44;
@@ -200,6 +202,8 @@ const Ball = (initialParent, parent, ballNumber = 0, top = false) => {
     const reverseDirection = ({axis, direction, id}) => {
 
         if(id !== ballId) return;
+
+        PlayMusic.playBallBounce();
 
         if(axis === "x" && direction === "negative" && vx >= 0){
             vx *= -1

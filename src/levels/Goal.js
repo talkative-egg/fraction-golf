@@ -1,5 +1,7 @@
 import events from '../events'
 
+import { PlayMusic } from '../loading/loadMusic';
+
 const Goal = (parent, cx, cy, goalNumber = 0) => {
 
     let width = 60;
@@ -54,6 +56,8 @@ const Goal = (parent, cx, cy, goalNumber = 0) => {
         const correct = checkNumber(ballNumber);
 
         if(distance(cx, cy, thisCenterX, thisCenterY) < radiusDistance - 10){
+
+            PlayMusic.playBallRolling();
 
             events.emit("hitGoal", {"centerX": thisCenterX, "centerY": thisCenterY, 
                                     id, intervalId, correct});
