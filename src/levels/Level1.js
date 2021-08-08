@@ -465,7 +465,7 @@ const Level1 = (() => {
         oneStarOuterContainer.appendChild(oneStarText);
 
         const helpText = document.createElement("p");
-        helpText.textContent = "Click on the ball with the right number to start";
+        helpText.textContent = "Click on the balls that match to the fraction!\nThen drag the balls to shoot them into the goals!"
         helpText.id = "level-1-help-text"
 
         const buttonContainer = document.createElement("button-container");
