@@ -1,4 +1,4 @@
-import backgroundMusic from "../sounds/notesFinal.mp3";
+import backgroundMusic from "../sounds/background-music.mp3";
 import ballRollingInHole from "../sounds/ball-rolling-in-hole.mp3";
 import ballBounce from "../sounds/ball-bounce.mp3";
 
