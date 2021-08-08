@@ -253,6 +253,13 @@
     transform: translate(0, -50%);
 }
 
+#timer{
+    font-size: 3rem;
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+}
+
 @keyframes slideInFromTop{
 
     0%{

@@ -18,6 +18,8 @@ const Level6 = (() => {
     const twoStar = 9;
     const oneStar = 12;
 
+    let timerOn = true;
+
     const level = 6;
 
     let allObjects = [];
@@ -537,6 +539,8 @@ const Level6 = (() => {
 
     function gameOver({ status, star }){
 
+        timerOn = false;
+
         if(status === "win"){
             events.emit("levelWin", { "level": level, "star": star });
             makeWinningPopup(star, outerContainer);
@@ -555,12 +559,51 @@ const Level6 = (() => {
 
     }
 
+    function makeTimer(container){
+
+        let startTime = Date.now();
+        
+        const timer = document.createElement("p");
+        timer.id = "timer";
+        timer.textContent = `00:00`
+
+        container.appendChild(timer);
+
+        let interval = 1000; // ms
+        let expected = Date.now() + interval;
+        setTimeout(step, interval);
+
+        function step() {
+
+            let dt = Date.now() - expected; // the drift (positive for overshooting)
+            
+            let seconds = parseInt((expected - startTime) / 1000);
+            let minutes = parseInt((seconds / 60));
+            seconds = seconds % 60;
+
+            seconds = (seconds.toString().length === 1)? `0${seconds}`:`${seconds}`;
+            minutes = (minutes.toString().length === 1)? `0${minutes}`:`${minutes}`;
+
+            timer.textContent = `${minutes}:${seconds}`;
+    
+            expected += interval;
+
+            if(timerOn){
+                setTimeout(step, Math.max(0, interval - dt)); // take into account drift
+            }
+            
+        }
+
+    }
+
     function load(makePopup = true){
 
         window.removeEventListener("click", removeStartingPopup);
 
         strokes = 0;
         correctCount = 0;
+
+        timerOn = true;
 
         generateFraction();
 
@@ -584,6 +627,7 @@ const Level6 = (() => {
         makeStars(outerContainer);
         makeFraction(outerContainer);
         makeBallSeparationLine(outerContainer);
+        makeTimer(outerContainer);
 
         document.querySelector("body").appendChild(outerContainer);
 

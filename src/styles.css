@@ -327,13 +327,12 @@ line{
 }
 
 #sign-in-container .sign-in-button{
-    display: inline-block;
     margin-bottom: 2rem;
     font-size: 3rem;
     border: 1px solid #c59d9d;
     padding: 1rem 1.5rem;
     border-radius: 1.5rem;
-    background-color: #83a8ce;
+    background-color: #ef4d58;
 }
 
 #sign-in-container .sign-in-button:hover{

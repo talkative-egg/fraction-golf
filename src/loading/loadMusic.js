@@ -5,6 +5,7 @@ import ballBounce from "../sounds/ball-bounce.mp3";
 export const PlayMusic = (() => {
 
     const background = new Audio(backgroundMusic); 
+    background.volume = 0.5;
     const ballRolling = new Audio(ballRollingInHole);
     const ballBounceOffWall = new Audio(ballBounce);
 
@@ -34,37 +35,18 @@ export const PlayMusic = (() => {
 
     }
 
-    function dimBackgroundMusic(){
-        background.volume = 0.2;
-    }
-
-    function resolveBackgroundMusic(){
-        background.volume = 1.0;
-    }
-
     function playBallRolling(){
-
-        dimBackgroundMusic();
 
         ballRolling.currentTime = 0;
         ballRolling.play();
-
-        ballRolling.addEventListener('ended', function() {
-            resolveBackgroundMusic();
-        }, false);
 
     }
 
     function playBallBounce(){
 
-        dimBackgroundMusic();
-
         ballBounceOffWall.currentTime = 0;
         ballBounceOffWall.play();
-
-        ballBounceOffWall.addEventListener('ended', function() {
-            resolveBackgroundMusic();
-        }, false);
+        
     }
 
     return { stopBackgroundMusic, playBackgroundMusic, musicPlaying, playBallRolling, playBallBounce };
