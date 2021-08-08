@@ -71,8 +71,6 @@ const Firebase = (() => {
 
         });
 
-        
-
     }
 
     return { writeUserData, getUserData, setUserId, getUserId, checkIfUserExists };
